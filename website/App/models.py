@@ -5,10 +5,9 @@ class Candidate(models.Model):
     password = models.CharField(max_length=30,null=False)
     name = models.CharField(max_length=30,null=False)
     test_attempted = models.IntegerField()
-    test_score = models.FloatField()
+    test_score = models.FloatField()     #+1    -0.33
     email = models.EmailField(max_length=30,null=False)   #email validator
     phone = models.IntegerField()
-
 
 class Questions(models.Model):
     que_id = models.BigAutoField(primary_key=True,auto_created=True)
