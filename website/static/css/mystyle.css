@@ -1,0 +1,90 @@
+body {
+    background-image: url('../images/modern-tricolor-indian-flag-theme-watercolor-brush-stroke-design-background_1055-21416.jpg');
+    background-size: cover;            
+    background-repeat: no-repeat;    
+    background-position: center;     
+    background-attachment: fixed;    
+    height: 100vh;   
+}
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f7faff;
+}
+
+
+.header {
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.header h1 {
+    margin: 0;
+    font-size: 32px;
+    color: #2c3e50;
+}
+
+.header p {
+    font-size: 18px;
+    color: #7f8c8d;
+}
+
+.header .btn {
+    display: inline-block;
+    background-color: #27ae60;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    margin-top: 20px;
+    font-size: 18px;
+}
+
+.app-buttons {
+    margin-top: 20px;
+}
+
+.app-buttons img {
+    width: 150px;
+    margin: 0 10px;
+}
+
+.content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 50px;
+    padding: 0 20px;
+}
+
+.content img {
+    width: 80%;
+    max-width: 400px;
+}
+
+.stats {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 50px;
+    padding: 30px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.stat {
+    text-align: center;
+}
+
+.stat h3 {
+    font-size: 24px;
+    color: #2c3e50;
+    margin: 0;
+}
+
+.stat p {
+    font-size: 16px;
+    color: #7f8c8d;
+}
+
