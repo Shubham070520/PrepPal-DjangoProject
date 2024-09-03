@@ -1,0 +1,138 @@
+/* Basic Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+  }
+  
+  /* Overlay for dimming background */
+  .overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7); /* Dark overlay */
+    z-index: 1;
+    pointer-events: none;
+    cursor: not-allowed;
+  }
+  
+  /* Login Popup Box */
+  .login-popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 350px;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    z-index: 2;
+  }
+  
+  /* Close Button */
+  .close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+  }
+  
+  /* Popup Content */
+  .login-popup h2 {
+    font-size: 22px;
+    margin-bottom: 15px;
+    text-align: center;
+  }
+  
+  .phone-number {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    font-size: 18px;
+  }
+  
+  .phone-number .icon {
+    margin-right: 10px;
+  }
+  
+  .phone-number .edit-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+  
+  p {
+    font-size: 14px;
+    color: #666;
+    text-align: center;
+  }
+  
+  .otp-input {
+    margin-bottom: 15px;
+  }
+  
+  .otp-input label {
+    font-size: 14px;
+    margin-bottom: 5px;
+    display: block;
+  }
+  
+  .otp-input input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .resend-otp {
+    margin-bottom: 15px;
+    font-size: 12px;
+    text-align: center;
+  }
+  
+  .login-btn {
+    width: 100%;
+    padding: 10px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  .signup {
+    margin-top: 15px;
+    text-align: center;
+    font-size: 14px;
+  }
+  
+  .signup a {
+    color: #007bff;
+    text-decoration: none;
+  }
+
+  .signup a:hover {
+    text-decoration: underline;
+    color: black;
+  }
+
+  .phone-number {
+    margin-bottom: 20px;
+}
+
+.phone-number input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+}

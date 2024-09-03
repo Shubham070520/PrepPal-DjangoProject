@@ -58,7 +58,7 @@ body {
 .navbar-menu li {
     margin-left: 80px;
     position : relative;
-    margin-right: 80px;
+    margin-right: 60px;
 }
 
 .navbar-menu a {
@@ -80,10 +80,10 @@ body {
     font-size: 16px;
     border: 1px solid #ddd;
     border-radius: 4px;
-    margin-right: 10px;
+    margin-right: 60px;
 }
 
-.get-started {
+.get-started-btn {
     padding: 8px 16px;
     background-color: #28a745;
     color: white;
@@ -91,9 +91,10 @@ body {
     border-radius: 4px;
     font-size: 16px;
     cursor: pointer;
+    text-decoration: none;
 }
 
-.get-started:hover {
+.get-started-btn:hover {
     background-color: #218838;
 }
 

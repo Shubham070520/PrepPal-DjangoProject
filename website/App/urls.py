@@ -8,6 +8,7 @@ urlpatterns = [
     path('candidateRegistration',views.candidateRegForm),
     path('submit',views.candidateRegistration),
     path('login',views.loginView),
+    path('otp',views.otp),
     path('home',views.candidateHome),
     path('testPaper',views.testPaper),
     path('calc-Result',views.calcTestRes),

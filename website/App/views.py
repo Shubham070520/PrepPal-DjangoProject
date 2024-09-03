@@ -5,10 +5,12 @@ from django.contrib.auth.models import User
 from django.contrib import messages #to add message
 from django.contrib.auth import authenticate,login,logout
 from django.db.models import Q  #to write min and max values
+import random
+from django.core.mail import send_mail
 
 
 def welcome(request):
-    pass
+    return render(request,'home.html')
 
 def candidateRegForm(request):
     pass
@@ -17,7 +19,10 @@ def candidateRegistration(request):
     pass
 
 def loginView(request):
-    pass
+    return render(request,'login.html')
+
+def otp(request):
+    return render(request,'login1.html')
 
 def candidateHome(request):
     pass

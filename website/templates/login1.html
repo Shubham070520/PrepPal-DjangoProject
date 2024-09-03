@@ -3,12 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Exam Preparation</title>
-     <link rel ="stylesheet" href="../static/css/mystyle.css">
-     <link rel="stylesheet" href="../static/css/bootstrap.min.css">
-
+    <title>Get Started Modal</title>
+    <link rel="stylesheet" href="../static/css/login1.css">
+    <link rel="stylesheet" href="../static/css/mystyle.css">
 </head>
 <body>
+<!-- Overlay Background -->
+<div class="overlay">
     <nav class="navbar">
         <div class="navbar-brand">
             <a href="#"><img src="../static/images/copy.png" alt="Logo" class="logo"></a>
@@ -17,21 +18,20 @@
         <ul class="navbar-menu">
             <!-- <li><a href="#">Exams</a></li> -->
             <li class="dropdown">
-                <a href="#" class="dropbtn">Exams</a>
+                <a href="#" class="dropbtn" aria-disabled="true">Exams</a>
                 <div class="dropdown-content">
                     <a href="#">UPSC</a>
                     <a href="#">SSC</a>
                     <a href="#">Banking</a>
                 </div>
             </li>
-            <li><a href="#">Notes</a></li>
-            <li><a href="#">Test Series</a></li>
-            <li><a href="#">Pass</a></li>
+            <li><a href="#" aria-disabled="true">Notes</a></li>
+            <li><a href="#" aria-disabled="true">Test Series</a></li>
+            <li><a href="#" aria-disabled="true">Pass</a></li>
         </ul>
         <div class="navbar-right">
-            <input type="text" placeholder="Search" class="search-bar">
-            <!-- <button class="get-started">Get Started</button> -->
-            <!-- <a href="/login" class="get-started-btn">Get Started</a> -->
+            <input type="text" placeholder="Search" class="search-bar" disabled>
+            <!-- <a href="#" class="get-started-btn" aria-disabled="true">Get Started</a> -->
         </div>
     </nav>
     <div class="header">
@@ -39,9 +39,7 @@
         <h1>One Destination for Complete Exam Preparation</h1>
         <br>
         <p>Learn &#9654; Practice &#9654; Improve &#9654; Succeed</p>
-        <br>
-        <a href="/login" class="get-started-btn">Get Started</a>
-        <br>
+        <!-- <a href="#" class="get-started-btn" aria-disabled="true">Get Started</a> -->
         <br>
         <div class="app-buttons">
             <a href="#"><img src="../static/images/images-removebg-preview.png" alt="UPSC"></a>
@@ -64,5 +62,29 @@
         <h2><i>A Journey from Aspirant To Officer  !! </i></h2>
         <img src="../static/images/file.png" alt="Exam Preparation Illustration">
     </div>
+</div>
+<div class="login-popup">
+    <button class="close-btn">&times;</button>
+    <h2>Welcome Back Friend!</h2>
+    
+    <div class="phone-number">
+      <span class="icon">📱</span>
+      <input type="text" placeholder="Please Enter your mobile number">
+      <button class="edit-btn">&#9998;</button>
+    </div>
+    
+    <p>OTP will be sent to you on above number</p>
+    
+    <div class="otp-input">
+      <label for="otp">OTP</label>
+      <input type="text" id="otp" placeholder="Enter OTP">
+    </div>
+    
+    <!-- <p class="resend-otp">Resend OTP in 23 secs</p> -->
+    
+    <button class="login-btn">LOGIN</button>
+    
+    <p class="signup">Don't have an Account? <a href="#">SIGN-UP</a></p>
+</div>
 </body>
 </html>
