@@ -2,12 +2,13 @@ from django.urls import path
 from django.conf import settings
 from django.conf.urls.static import static
 from App import views
+app_name= 'App'
 
 urlpatterns = [
     path('',views.welcome),
-    path('candidateRegistration',views.candidateRegForm),
-    path('submit',views.candidateRegistration),
-    path('login',views.loginView),
+    path('candidateRegistration',views.candidateRegForm),   #,name="registrationForm"
+    path('store-candidate',views.candidateRegistration), #name='store-candidate'
+    path('login',views.loginView), #name="login"
     path('otp',views.otp),
     path('home',views.candidateHome),
     path('testPaper',views.testPaper),

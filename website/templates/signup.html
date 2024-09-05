@@ -5,8 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Get Started Modal</title>
-    <link rel="stylesheet" href="../static/css/login.css">
     <link rel="stylesheet" href="../static/css/mystyle.css">
+    <link rel="stylesheet" href="../static/css/signup.css">
 </head>
 <body>
     <!-- Overlay Background -->
@@ -64,26 +64,34 @@
             <img src="../static/images/file.png" alt="Exam Preparation Illustration">
         </div>
     </div>
-
-    <!-- Modal Container -->
-    <div class="modal">
+     <!-- Signup Modal -->
+     <div class="modal" id="signup-modal">
         <div class="modal-header">
             <img src="../static/images/copy.png" alt="Logo" class="logo">
-            <h2>Get started with PrepPal!</h2>
-            <p>Continue with your mobile number</p>
+            <h2>Sign up for PrepPal!</h2>
+            <p>Create a new account</p>
         </div>
         <div class="modal-body">
-            <form>
+            <form action="/store-candidate", method="post">
+                {% csrf_token %}
                 <div class="input-container">
-                    <input type="text" placeholder="Please Enter your mobile number">
+                    <input type="text" name ="name" placeholder="Enter your full name" required>
                 </div>
-                <!-- <button type="submit"  href="/otpcheck" class="continue-btn">Continue</button>-->
-                <a href="/otp" class="continue-btn">Continue</a>
-            </form>        
+                <div class="input-container">
+                    <input type="text" name ="username" placeholder="Enter your username" required>
+                </div>
+                <div class="input-container">
+                    <input type="email" name="email" placeholder="Enter your email" required>
+                </div>
+                <div class="input-container">
+                    <input type="password" name="password" placeholder="Please Enter your password" required>
+                </div>
+                <button type="submit" value="submit" class="signup-btn">Sign Up</button>
+            </form>
         </div>
-        <!-- <div class="modal-footer">
-            <p>Already have an account? <a href="#">LOGIN</a></p>
-        </div> -->
+        <div class="modal-footer">
+            <p>Already have an account? <a href="/login">LOGIN</a></p>
+        </div>
     </div>
 </body>
 </html>

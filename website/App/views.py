@@ -13,10 +13,17 @@ def welcome(request):
     return render(request,'home.html')
 
 def candidateRegForm(request):
-    pass
+    return render (request,'signup.html')
 
 def candidateRegistration(request):
-    pass
+    if request.method == "POST":
+        u = request.POST['username']
+        # to check if the username already exists 
+        if Candidate.objects.filter(username=u).exists():
+            messages.error(request,'Username already exists')
+        else:
+            pass
+
 
 def loginView(request):
     return render(request,'login.html')

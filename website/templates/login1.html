@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -68,15 +69,16 @@
     <h2>Welcome Back Friend!</h2>
     
     <div class="phone-number">
-      <span class="icon">📱</span>
+        <!-- <label for="phone-number">Phone-Number</label> -->
+      <!-- <span class="icon">📱</span> -->
       <input type="text" placeholder="Please Enter your mobile number">
-      <button class="edit-btn">&#9998;</button>
+      <!-- <button class="edit-btn">&#9998;</button> -->
     </div>
     
     <p>OTP will be sent to you on above number</p>
     
     <div class="otp-input">
-      <label for="otp">OTP</label>
+      <!-- <label for="otp">OTP</label> -->
       <input type="text" id="otp" placeholder="Enter OTP">
     </div>
     
@@ -84,7 +86,7 @@
     
     <button class="login-btn">LOGIN</button>
     
-    <p class="signup">Don't have an Account? <a href="#">SIGN-UP</a></p>
+    <p class="signup">Don't have an Account? <a href="/candidateRegistration">SIGN-UP</a></p>
 </div>
 </body>
 </html>
