@@ -74,20 +74,36 @@
         <div class="modal-body">
             <form action="/store-candidate", method="post">
                 {% csrf_token %}
+                {% if messages %}
+                <ul class="messages">
+                {% for message in messages %}
+                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                {% endfor %}
+                </ul>
+                {% endif %}
                 <div class="input-container">
+                    <label>Name:</label>
                     <input type="text" name ="name" placeholder="Enter your full name" required>
                 </div>
                 <div class="input-container">
+                    <label>Username:</label>
                     <input type="text" name ="username" placeholder="Enter your username" required>
                 </div>
                 <div class="input-container">
+                    <label>Email:</label>
                     <input type="email" name="email" placeholder="Enter your email" required>
                 </div>
                 <div class="input-container">
+                    <label>Phone Number:</label>
+                    <input type="tel" name="number" placeholder="Enter your phone number" required>
+                </div>
+                <div class="input-container">
+                    <label>Password:</label>
                     <input type="password" name="password" placeholder="Please Enter your password" required>
                 </div>
                 <div class="input-container">
-                    <input type="password" name="confirm_password" placeholder="Please Enter your password" required>
+                    <label>Confirm Password:</label>
+                    <input type="password" name="confirm_password" placeholder="Retype your password" required>
                 </div>
                 <button type="submit" value="submit" class="signup-btn">Sign Up</button>
             </form>

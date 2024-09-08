@@ -25,11 +25,13 @@ def candidateRegistration(request):
             messages.error(request,'Username already exists')
             return render(request, 'signup.html')
         else:
+            # to capture values
             e = request.POST['email']
+            n = request.POST['number']
             p = request.POST['password']
             cp = request.POST['confirm_password']
             # validation
-            if u=='' or e=='' or p=='' or cp== '' :
+            if u=='' or e=='' or p=='' or cp== '' or n =='':
                 messages.error(request,'All fields are compulsory')
                 return render(request,'signup.html')
             
@@ -71,16 +73,19 @@ def candidateRegistration(request):
                 messages.error(request, 'Password must be at least 8 characters long')
                 return render(request, 'signup.html')
             
-            #Create a New Candidate
             
+            #Create a New Candidate
+            # else:
             try:    #Added a try-except block to catch any unexpected errors during registration.
-                o = Candidate.objects.create (username= u,email=e,password=p)
+                o = Candidate.objects.create(username= u,email=e,password=p,phone = n)
                 o.save()
                 messages.success(request,'Registered successfully,Please Login')
                 return redirect('/login')
             except Exception as e:
                 messages.error(request, 'An error occurred during registration')
                 return render(request, 'signup.html')
+    else:
+        return render(request,'signup.html')
 
 
 def loginView(request):

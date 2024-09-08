@@ -51,6 +51,12 @@
     margin-bottom: 15px;
     text-align: center;
   }
+
+  .login-popup p {
+    font-size: 14px;
+    margin-bottom: 15px;
+    text-align: center;
+  }
   
   .phone-number {
     display: flex;
@@ -130,5 +136,5 @@
     padding: 10px;
     border: 1px solid #ddd;
     border-radius: 4px;
-    font-size: 18px;
+    font-size: 14px;
 }
