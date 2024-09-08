@@ -89,7 +89,17 @@ def candidateRegistration(request):
 
 
 def loginView(request):
-    return render(request,'login.html')
+    if request.method == 'POST':
+        u = request.POST['username']
+        p = request.POST['password']
+        user = authenticate(username=u, password=p)
+        if user == None: #for verifying user
+            messages.error(request, 'Invalid credentials')
+            return render(request, 'login.html')
+        else:
+            login(request, user)
+            messages.success(request,'Logged in successfully!')
+            return redirect('home-content.html')
 
 def otp(request):
     return render(request,'login1.html')
