@@ -5,12 +5,12 @@ from App import views
 app_name= 'App'
 
 urlpatterns = [
-    path('',views.welcome),
-    path('candidateRegistration',views.candidateRegForm),   #,name="registrationForm"
+    path('',views.welcome),  #http://127.0.0.1:8000/
+    path('candidateRegistration',views.candidateRegForm),   #signup.html ,name="registrationForm"
     path('store-candidate',views.candidateRegistration), #name='store-candidate'
     path('login',views.loginView), #name="login"
     path('otp',views.otp),
-    path('home',views.candidateHome),
+    path('home',views.candidateHome), #redirect after login
     path('testPaper',views.testPaper),
     path('calc-Result',views.calcTestRes),
     path('test-History',views.testResHistory),
