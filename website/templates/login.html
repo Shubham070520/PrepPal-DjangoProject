@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Get Started Modal</title>
+    <title>PrepPal Login</title>
     <link rel="stylesheet" href="../static/css/login.css">
     <link rel="stylesheet" href="../static/css/mystyle.css">
 </head>
@@ -80,7 +80,7 @@
             {% endfor %}
             </ul>
             {% endif %}
-            <form action="/login" method="post">
+            <form action="{% url 'App:login' %}" method="POST">
                 {% csrf_token %}
                 <div class="input-container">
                     <label>Username:</label>
@@ -90,16 +90,13 @@
                     <label>Password:</label>
                     <input type="password" name="password" placeholder="Please Enter your password">
                 </div>
-                <!-- <button type="submit"  href="/otpcheck" class="continue-btn">Continue</button>-->
-                <a href="/home" class="continue-btn">Continue</a>
+                <!-- <a href="/home" class="continue-btn">Continue</a> -->
+                <button type="submit" class="continue-btn">Continue</button>
                 <div class="modal-footer">
-                    <p>Login via OTP? <a href="/otp">Send OTP</a></p>
+                    <p>Login via OTP? <a href="{% url 'App:otp-verification' %}">Send OTP</a></p>
                 </div>
             </form>        
         </div>
-        <!-- <div class="modal-footer">
-            <p>Already have an account? <a href="#">LOGIN</a></p>
-        </div> -->
     </div>
 </body>
 </html>

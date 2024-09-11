@@ -7,6 +7,8 @@ from django.contrib.auth import authenticate,login,logout
 from django.db.models import Q  #to write min and max  values
 import random
 import re
+from django.urls import reverse
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.hashers import make_password #Used Django's built-in make_password function to hash the password before storing it in the database.
 from django.core.mail import send_mail
 
@@ -73,7 +75,6 @@ def candidateRegistration(request):
                 messages.error(request, 'Password must be at least 8 characters long')
                 return render(request, 'signup.html')
             
-            
             #Create a New Candidate
             # else:
             try:    #Added a try-except block to catch any unexpected errors during registration.
@@ -88,31 +89,67 @@ def candidateRegistration(request):
         return render(request,'signup.html')
 
 
+# def loginView(request):
+#     print("entering loginView function")
+#     if request.method == 'POST':
+#         u = request.POST.get('username') 
+#         p = request.POST.get('password')
+#         # The get method is used to retrieve the value for the specified key ('key') from the QueryDict. If the key is not found, it returns the specified default value (default) instead of raising an error.
+#         print(f"username: {u}, password: {p}")
+#         if not u or not p:
+#             messages.error(request, 'Please fill in both username and password.')
+#             return redirect('App:login')
+#         # else:
+#         try:
+#             user = authenticate(username=u, password=p)
+#             print(f"Authenticated User: {user}")  #why it is showing none
+#             if user is not None:
+#                 login(request, user)  # This will set the session automatically
+#                 request.session['name'] = user.username
+#                 print(f"User {user.username} logged in successfully.")
+#                 messages.success(request, 'Logged in successfully!')
+#                 return render(request,'App:home')
+#             else:
+#                 messages.error(request, 'Invalid credentials')
+#                 return redirect('App:login')
+#         except Exception as e:
+#             print(f"Error during authentication: {e}")
+#             messages.error(request, 'An error occurred during authentication')
+#             return redirect('App:login')
+#     else: 
+#           return render(request, 'login.html')
+
 def loginView(request):
     if request.method == 'POST':
-        u = request.POST['username']
-        p = request.POST['password']
-        user = Candidate.objects.get(username = u, password=p)
-        user = authenticate(username=u, password=p)
-        if user is not None:
-                login(request, user)  # This will set the session automatically
-                messages.success(request, 'Logged in successfully!')
-                return redirect('home')
+        u = request.POST.get('username')
+        p = request.POST.get('password')
+        c = Candidate.objects.filter(username=u, password=p)
+        if len(c) == 0:
+            messages.error(request, 'Invalid credentials')
+            return render(request,'App:login')
         else:
-                messages.error(request, 'Invalid credentials')
-                return redirect('/login')
+            request.session['username'] = c[0].username
+            request.session['name'] = c[0].name
+            return redirect('App:home')
     else:
-        return render(request, 'login.html')
+        return render(request,'login.html')
 
 def otp(request):
     return render(request,'login1.html')
 
+# @login_required(login_url='login')  #checks if the user is authenticated and redirects them to the login page if they are not. The login_url='login' argument ensures that it uses the correct login URL.
+# def candidateHome(request):
+#     #if request.user.is_authenticated:
+#     user = request.user
+#     return render(request, 'home-content.html')
+#     # else:
+#     #     return redirect('login')
+
 def candidateHome(request):
-    if request.user.is_authenticated:
-        user = request.user
-        return render(request, 'home-content.html', {'user': user})
-    else:
+    if 'username' not in request.session.keys():
         return redirect('login')
+    else:
+        return render(request, 'home-content.html')
 
 def testPaper(request):
     pass

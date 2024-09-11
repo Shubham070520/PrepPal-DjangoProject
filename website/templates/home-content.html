@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Exam Preparation</title>
-     <link rel ="stylesheet" href="../static/css/mystyle.css">
+     <link rel ="stylesheet" href="../static/css/mystyle1.css">
      <link rel="stylesheet" href="../static/css/bootstrap.min.css">
 
 </head>
@@ -19,28 +19,28 @@
             <!-- <li><a href="#">Exams</a></li> -->
             <li class="dropdown">
                 <a href="#" class="dropbtn">Exams</a>
-                <div class="dropdown-content">
-                    <a href="#">Civil Services</a>
-                    <a href="#">SSC</a>
-                    <a href="#" class="dropbtn">Defence Services</a>
-                        <div class="dropdown-content">
-                          <a href="#">Army</a>
-                          <a href="#">Navy</a>
-                          <a href="#">Air Force</a>
-                          <a href="#">Coast Guard</a>
-                          <a href="#">Paramilitary Forces</a>
+                    <div class="dropdown-content">
+                        <a href="#">Civil Services</a>
+                        <a href="#">SSC</a>
+                        <div class="dropdown">
+                            <a href="#" class="dropbtn">Defence Services</a>
+                            <div class="dropdown-content nested-dropdown">
+                                <a href="#">Combined Defence Services</a>
+                                <div class="nested-dropdown">
+                                    <a href="#">Indian Military Academy</a>
+                                    <a href="#">Officers Training Academy</a>
+                                </div>
+                                <a href="#">Coast Guard</a>
+                                <a href="#">Paramilitary Forces</a>
+                            </div>
                         </div>
-                    <a href="#" class="dropbtn">{{user.username}}</a>
-                        <div class="dropdown-content">
-                          <a href="#">Profile</a>
-                          <a href="/logout">Logout</a>
-                        </div>   
-                </div>
-            </li>
+                    </div>
+                </li>
             <li><a href="#">Notes</a></li>
             <li><a href="#">Test Series</a></li>
             <li><a href="#">Current Affairs</a></li>
             <li><a href="#">Pass</a></li>
+            <a href="/logout">Logout</a>
         </ul>
     </nav>
     {% if messages %}
@@ -50,3 +50,4 @@
     {% endfor %}
     </ul>
     {% endif %}
+    <
