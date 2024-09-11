@@ -20,20 +20,33 @@
             <li class="dropdown">
                 <a href="#" class="dropbtn">Exams</a>
                 <div class="dropdown-content">
-                    <a href="#">UPSC</a>
+                    <a href="#">Civil Services</a>
                     <a href="#">SSC</a>
-                    <a href="#">Banking</a>
+                    <a href="#" class="dropbtn">Defence Services</a>
+                        <div class="dropdown-content">
+                          <a href="#">Army</a>
+                          <a href="#">Navy</a>
+                          <a href="#">Air Force</a>
+                          <a href="#">Coast Guard</a>
+                          <a href="#">Paramilitary Forces</a>
+                        </div>
+                    <a href="#" class="dropbtn">{{user.username}}</a>
+                        <div class="dropdown-content">
+                          <a href="#">Profile</a>
+                          <a href="/logout">Logout</a>
+                        </div>   
                 </div>
             </li>
             <li><a href="#">Notes</a></li>
             <li><a href="#">Test Series</a></li>
             <li><a href="#">Current Affairs</a></li>
             <li><a href="#">Pass</a></li>
-            <li><a href="#">Logout</a></li>
         </ul>
-        <div class="navbar-right">
-            <input type="text" placeholder="Search" class="search-bar">
-            <!-- <button class="get-started">Get Started</button> -->
-            <!-- <a href="/login" class="get-started-btn">Get Started</a> -->
-        </div>
     </nav>
+    {% if messages %}
+    <ul class="messages">
+    {% for message in messages %}
+    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+    </ul>
+    {% endif %}

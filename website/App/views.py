@@ -92,45 +92,15 @@ def loginView(request):
     if request.method == 'POST':
         u = request.POST['username']
         p = request.POST['password']
-    #     user = authenticate(username=u, password=p)
-    #     if user == None: #for verifying user
-    #         messages.error(request, 'Invalid credentials')
-    #         return render(request, 'login.html')
-    #     else:
-    #         login(request, user)
-    #         messages.success(request,'Logged in successfully!')
-    #         return redirect('home-content.html')
-    # else:
-    #     return render(request, 'login.html')
-    
-    #     try:
-    #         user = Candidate.objects.get(username=u)
-    #         if user.check_password(p): # Verify the password
-    #             login(request, user)
-    #             messages.success(request,'Logged in successfully!')
-    #             return redirect('home-content.html')
-    #         else:
-    #             messages.error(request, 'Invalid credentials')
-    #             return render(request, 'login.html')
-    #     except Candidate.DoesNotExist:
-    #         messages.error(request, 'Invalid credentials')
-    #         return render(request, 'login.html')
-    # else:
-    #     return render(request, 'login.html')
-        try:
-            user = Candidate.objects.get(username=u)
-            if user.check_password(p): # Verify the password
-                # Create a session for the user
-                request.session['username'] = u
-                login(request, user)
-                messages.success(request,'Logged in successfully!')
-                return redirect('home-content.html')
-            else:
+        user = Candidate.objects.get(username = u, password=p)
+        user = authenticate(username=u, password=p)
+        if user is not None:
+                login(request, user)  # This will set the session automatically
+                messages.success(request, 'Logged in successfully!')
+                return redirect('home')
+        else:
                 messages.error(request, 'Invalid credentials')
-                return redirect(request, 'login.html')
-        except Candidate.DoesNotExist:
-            messages.error(request, 'Invalid credentials')
-            return redirect(request, 'login.html')
+                return redirect('/login')
     else:
         return render(request, 'login.html')
 
@@ -138,7 +108,11 @@ def otp(request):
     return render(request,'login1.html')
 
 def candidateHome(request):
-    return render(request,'home-content.html')
+    if request.user.is_authenticated:
+        user = request.user
+        return render(request, 'home-content.html', {'user': user})
+    else:
+        return redirect('login')
 
 def testPaper(request):
     pass
@@ -153,42 +127,10 @@ def showTestRes(request):
     pass
 
 def logoutView(request):
-    pass
+    logout(request)  #user object is in request
+    messages.success(request,'Logged out successfully!')
+    return redirect('/')
 
-
-
-# def loginView(request):
-#     if request.method == 'POST':
-#         u = request.POST['username']
-#         p = request.POST['password']
-#         try:
-#             user = Candidate.objects.get(username=u)
-#             if user.check_password(p): # Verify the password
-#                 # Create a session for the user
-#                 request.session['username'] = u
-#                 request.session['user_id'] = user.id
-#                 login(request, user)
-#                 messages.success(request,'Logged in successfully!')
-#                 return redirect('home-content.html')
-#             else:
-#                 messages.error(request, 'Invalid credentials')
-#                 return render(request, 'login.html')
-#         except Candidate.DoesNotExist:
-#             messages.error(request, 'Invalid credentials')
-#             return render(request, 'login.html')
-#     else:
-#         return render(request, 'login.html')
-
-# def logoutView(request):
-#     try:
-#         # Clear the session
-#         del request.session['username']
-#         del request.session['user_id']
-#     except KeyError:
-#         pass
-#     logout(request)
-#     messages.success(request, 'Logged out successfully!')
-#     return redirect('login.html')
 
 # def candidateHome(request):
 #     if 'username' in request.session:

@@ -65,6 +65,13 @@
     </div>
 </div>
 <div class="login-popup">
+    {% if messages %}
+            <ul class="messages">
+            {% for message in messages %}
+            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+            </ul>
+            {% endif %}
     <button class="close-btn">&times;</button>
     <h2>Welcome Back Friend!</h2>
     
