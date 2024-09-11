@@ -22,6 +22,7 @@
                     <div class="dropdown-content">
                         <a href="#">Civil Services</a>
                         <a href="#">SSC</a>
+                        <a href="#">National Defence Academy</a>
                         <div class="dropdown">
                             <a href="#" class="dropbtn">Defence Services</a>
                             <div class="dropdown-content nested-dropdown">
@@ -37,7 +38,7 @@
                     </div>
                 </li>
             <li><a href="#">Notes</a></li>
-            <li><a href="#">Test Series</a></li>
+            <li><a href="/candidateRegistrartion">Test Series</a></li>
             <li><a href="#">Current Affairs</a></li>
             <li><a href="#">Pass</a></li>
             <a href="/logout">Logout</a>
@@ -50,4 +51,69 @@
     {% endfor %}
     </ul>
     {% endif %}
-    <
+    <div class="header">
+        <br>
+        <h1>One Destination for Complete Exam Preparation</h1>
+        <br>
+        <p>Learn &#9654; Practice &#9654; Improve &#9654; Succeed</p>
+        <br>
+        <h3>Hello {{request.session.name}}, What are you practicing today ?</h3>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="card transparent-card" style="width: 18rem;">
+                        <img src="../static/images/ssc.png" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">SSC</h5>
+                            <a href="#" class="btn btn-primary">Go to Test-Series</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card transparent-card" style="width: 18rem;">
+                        <img src="../static/images/nda.png" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">National Defence Academy (Maths)</h5>
+                                <a href="#" class="btn btn-primary">Go to Test-Series</a>
+                            </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card transparent-card" style="width: 18rem;">
+                        <img src="../static/images/CDS.png" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">Combined Defence Services (IMA-MATHS)</h5>
+                                <a href="#" class="btn btn-primary">Go to Test-Series</a>
+                            </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card transparent-card" style="width: 18rem;">
+                        <img src="../static/images/CDS.png" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">Combined Defence Services (OTA)</h5>
+                                <a href="#" class="btn btn-primary">Go to Test-Series</a>
+                            </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card transparent-card" style="width: 18rem;">
+                        <img src="../static/images/afcat.png" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">AFCAT</h5>
+                                <a href="#" class="btn btn-primary">Go to Test-Series</a>
+                            </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card transparent-card" style="width: 18rem;">
+                        <img src="../static/images/upsc.png" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">Civil Services</h5>
+                                <a href="#" class="btn btn-primary">Go to Test-Series</a>
+                            </div>
+                    </div>
+                </div>
+            </div>
+        </div>      

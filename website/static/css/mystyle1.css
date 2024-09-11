@@ -140,3 +140,19 @@ body {
 .dropdown-content .dropdown {
     position: relative;
 }
+
+.transparent-card {
+    background-color: transparent !important;
+}
+.transparent-card .card-body {
+    background-color: transparent !important;  /* Ensure the card body is also transparent */
+}
+
+.card {
+    background-color: transparent !important;  /* Applies to all cards */
+    border: none;  /* Optional: remove the card's border */
+}
+
+.card-body {
+    background-color: transparent !important;  /* Ensures transparency in the body */
+}
