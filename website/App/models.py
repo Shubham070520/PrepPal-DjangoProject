@@ -19,6 +19,9 @@ class Questions(models.Model):
     opt_4 = models.CharField(max_length=255)
     correct_ans = models.CharField(max_length=255)
 
+    def __str__(self):
+        return self.que
+
 class Result(models.Model):
     res_id = models.BigAutoField(primary_key=True,auto_created=True)
     username = models.ForeignKey(Candidate,on_delete=models.CASCADE)

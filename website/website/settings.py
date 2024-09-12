@@ -83,27 +83,27 @@ WSGI_APPLICATION = 'website.wsgi.application'
 #     }
 # }
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.mysql',
-#         'NAME': 'UPSC_Questions',
-#         'USER': 'root',
-#         'PASSWORD': '201919$Shubh',
-#         'HOST': 'localhost',
-#          'PORT': '3306',
-#     }
-# }
-
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',   #pip install psycopg2  ......to connect django and postgres
-        'NAME': 'UPSC_Questions',
-        'USER': 'postgres',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'Exam_Questions',
+        'USER': 'root',
         'PASSWORD': '201919$Shubh',
         'HOST': 'localhost',
-        'PORT': '5432',
+         'PORT': '3306',
     }
 }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',   #pip install psycopg2  ......to connect django and postgres
+#         'NAME': 'UPSC_Questions',
+#         'USER': 'postgres',
+#         'PASSWORD': '201919$Shubh',
+#         'HOST': 'localhost',
+#         'PORT': '5432',
+#     }
+# }
 
 
 

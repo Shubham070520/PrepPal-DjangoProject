@@ -11,6 +11,7 @@ from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.hashers import make_password #Used Django's built-in make_password function to hash the password before storing it in the database.
 from django.core.mail import send_mail
+from django.core.paginator import Paginator  #Django’s Paginator class can be used to handle large numbers of questions more efficiently.
 
 
 def welcome(request):
@@ -120,19 +121,25 @@ def candidateRegistration(request):
 #           return render(request, 'login.html')
 
 def loginView(request):
-    if request.method == 'POST':
+    if request.method == 'GET':
+        return render(request,'login.html')
+    else:
         u = request.POST.get('username')
         p = request.POST.get('password')
         c = Candidate.objects.filter(username=u, password=p)
         if len(c) == 0:
             messages.error(request, 'Invalid credentials')
-            return render(request,'App:login')
+            return redirect('App:login')
         else:
             request.session['username'] = c[0].username
             request.session['name'] = c[0].name
             return redirect('App:home')
-    else:
-        return render(request,'login.html')
+    
+# def welcome1(request):
+#     if 'username' not in request.session.keys():
+#         return redirect('login')
+
+
 
 def otp(request):
     return render(request,'login1.html')
@@ -152,10 +159,32 @@ def candidateHome(request):
         return render(request, 'home-content.html')
 
 def testPaper(request):
-    pass
+    if 'username' not in request.session.keys():
+        return redirect('login/')
+    # n = int(request.GET['n'])
+    # question_pool = list(Questions.objects.all())
+    # random.shuffle(question_pool)
+    # question_list = question_pool[:n]
+    # context = {'questions' : question_list}
+    # return render(request, 'test-paper.html',context)
+    n = int(request.GET.get('n', 10))  # Number of questions to fetch (default to 10)
+    que_pool = list(Questions.objects.all())  # Retrieve all questions
+    random.shuffle(que_pool)  # Shuffle the question list randomly
+    que_list = que_pool[:n]  # Select 'n' questions
+
+    # Pass the list of questions to the template
+    context = {'Questions': que_list}
+    return render(request, 'test-paper.html', context)
+
+    
+
 
 def calcTestRes(request):
-    pass
+    if 'username' not in request.session.keys():
+        return redirect('login')
+    total_attempt = 0
+    total_right = 0
+    
 
 def testResHistory(request):
     pass
@@ -164,9 +193,13 @@ def showTestRes(request):
     pass
 
 def logoutView(request):
-    logout(request)  #user object is in request
-    messages.success(request,'Logged out successfully!')
-    return redirect('/')
+    # logout(request)  #user object is in request
+    # messages.success(request,'Logged out successfully!')
+    # return redirect('/')
+    if 'username' in request.session.keys():
+        del request.session['username']
+        del request.session['name']
+    return redirect('/login')
 
 
 # def candidateHome(request):

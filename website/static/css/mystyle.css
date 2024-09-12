@@ -27,6 +27,7 @@ body {
     justify-content: space-between;
     padding: 10px 20px;
     box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+    width: 100%;
 }
 
 .navbar-brand {
@@ -51,14 +52,22 @@ body {
 .navbar-menu {
     list-style: none;
     display: flex;
+    justify-content: space-evenly;
     margin: 0;
     padding: 0;
+    width: 100%;
 }
 
-.navbar-menu li {
+/* .navbar-menu li {
     margin-left: 80px;
     position : relative;
     margin-right: 60px;
+} */
+
+.navbar-menu li {
+    margin: 0; /* Remove individual margins to avoid extra spacing */
+    padding: 0 10px; /* Adjust as per the spacing you want */
+    position: relative;
 }
 
 .navbar-menu a {

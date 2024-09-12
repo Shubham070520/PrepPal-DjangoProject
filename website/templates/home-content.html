@@ -13,7 +13,7 @@
     <nav class="navbar">
         <div class="navbar-brand">
             <a href="#"><img src="../static/images/copy.png" alt="Logo" class="logo"></a>
-            <a href="/" class="brand-name">PrepPal</a>
+            <a href="#" class="brand-name">PrepPal</a>
         </div>
         <ul class="navbar-menu">
             <!-- <li><a href="#">Exams</a></li> -->
@@ -22,7 +22,6 @@
                     <div class="dropdown-content">
                         <a href="#">Civil Services</a>
                         <a href="#">SSC</a>
-                        <a href="#">National Defence Academy</a>
                         <div class="dropdown">
                             <a href="#" class="dropbtn">Defence Services</a>
                             <div class="dropdown-content nested-dropdown">
@@ -31,6 +30,7 @@
                                     <a href="#">Indian Military Academy</a>
                                     <a href="#">Officers Training Academy</a>
                                 </div>
+                                <a href="#">National Defence Academy</a>
                                 <a href="#">Coast Guard</a>
                                 <a href="#">Paramilitary Forces</a>
                             </div>
@@ -38,10 +38,10 @@
                     </div>
                 </li>
             <li><a href="#">Notes</a></li>
-            <li><a href="/candidateRegistrartion">Test Series</a></li>
+            <li><a href="{% url 'App:test-history' %}">Test History</a></li>
             <li><a href="#">Current Affairs</a></li>
             <li><a href="#">Pass</a></li>
-            <a href="/logout">Logout</a>
+            <li><a href="{% url 'App:logout' %}">Logout</a></li>
         </ul>
     </nav>
     {% if messages %}
@@ -66,7 +66,7 @@
                         <img src="../static/images/ssc.png" class="card-img-top" alt="...">
                         <div class="card-body">
                             <h5 class="card-title">SSC</h5>
-                            <a href="#" class="btn btn-primary">Go to Test-Series</a>
+                            <a href="{% url 'App:test-paper' %}?n=50" class="btn btn-primary">Go to Test-Series</a>
                         </div>
                     </div>
                 </div>
@@ -75,7 +75,7 @@
                         <img src="../static/images/nda.png" class="card-img-top" alt="...">
                             <div class="card-body">
                                 <h5 class="card-title">National Defence Academy (Maths)</h5>
-                                <a href="#" class="btn btn-primary">Go to Test-Series</a>
+                                <a href="{% url 'App:test-paper' %}?n=10" class="btn btn-primary">Go to Test-Series</a>  <!--appending data in url which goes through get method-->
                             </div>
                     </div>
                 </div>
@@ -84,7 +84,7 @@
                         <img src="../static/images/CDS.png" class="card-img-top" alt="...">
                             <div class="card-body">
                                 <h5 class="card-title">Combined Defence Services (IMA-MATHS)</h5>
-                                <a href="#" class="btn btn-primary">Go to Test-Series</a>
+                                <a href="{% url 'App:test-paper' %}?n=10" class="btn btn-primary">Go to Test-Series</a>
                             </div>
                     </div>
                 </div>
@@ -93,7 +93,7 @@
                         <img src="../static/images/CDS.png" class="card-img-top" alt="...">
                             <div class="card-body">
                                 <h5 class="card-title">Combined Defence Services (OTA)</h5>
-                                <a href="#" class="btn btn-primary">Go to Test-Series</a>
+                                <a href="{% url 'App:test-paper' %}?n=10" class="btn btn-primary">Go to Test-Series</a>
                             </div>
                     </div>
                 </div>
@@ -102,7 +102,7 @@
                         <img src="../static/images/afcat.png" class="card-img-top" alt="...">
                             <div class="card-body">
                                 <h5 class="card-title">AFCAT</h5>
-                                <a href="#" class="btn btn-primary">Go to Test-Series</a>
+                                <a href="{% url 'App:test-paper' %}?n=10" class="btn btn-primary">Go to Test-Series</a>
                             </div>
                     </div>
                 </div>
@@ -111,7 +111,7 @@
                         <img src="../static/images/upsc.png" class="card-img-top" alt="...">
                             <div class="card-body">
                                 <h5 class="card-title">Civil Services</h5>
-                                <a href="#" class="btn btn-primary">Go to Test-Series</a>
+                                <a href="{% url 'App:test-paper' %}?n=10" class="btn btn-primary">Go to Test-Series</a>
                             </div>
                     </div>
                 </div>
