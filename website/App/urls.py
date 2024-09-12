@@ -10,11 +10,11 @@ urlpatterns = [
     path('candidateRegistration',views.candidateRegForm,name="candidateRegistration"),   #signup.html ,name="registrationForm"
     path('store-candidate',views.candidateRegistration,name="store-candidate"), #name='store-candidate'
     path('login/' ,views.loginView, name="login"), 
-    path('otp',views.otp,name="otp-verification"),
+    # path('otp',views.otp,name="otp-verification"),
     path('home',views.candidateHome,name="home"), #redirect after login
     path('test-Paper',views.testPaper,name="test-paper"),
     path('calc-Result',views.calcTestRes,name="calc-Result"),
     path('test-History',views.testResHistory,name="test-history"),
-    path('result',views.showTestRes,name="show-result"),
+    path('result/',views.showTestRes,name="showresult"),
     path('logout',views.logoutView,name="logout"),
 ]

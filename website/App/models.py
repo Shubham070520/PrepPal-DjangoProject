@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+import random
 
 class Candidate(models.Model):
     username = models.CharField(max_length=30,primary_key=True)
@@ -10,7 +11,15 @@ class Candidate(models.Model):
     email = models.EmailField(max_length=30,null=False)   #email validator
     phone = models.BigIntegerField(null= False)
 
+
+class Exam(models.Model):
+    name = models.CharField(max_length=255)
+
+    def __str__(self):
+        return self.name
+
 class Questions(models.Model):
+    exam = models.ForeignKey(Exam, on_delete=models.CASCADE,null=False,default=1)  #One exam can have many questions
     que_id = models.BigAutoField(primary_key=True,auto_created=True)
     que = models.TextField()
     opt_1 = models.CharField(max_length=255)
@@ -31,5 +40,13 @@ class Result(models.Model):
     right_attempts = models.IntegerField()
     wrong_attempts = models.IntegerField()
     test_score = models.FloatField()
+
+# class OTP(models.Model):
+#     user = models.OneToOneField(User, on_delete=models.CASCADE)
+#     otp = models.CharField(max_length=6)
+#     created_at = models.DateTimeField(auto_now_add=True)
+
+#     def generate_otp(self):
+#         return str(random.randint(100000, 999999))
 
 

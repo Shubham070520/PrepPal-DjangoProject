@@ -141,8 +141,13 @@ def loginView(request):
 
 
 
-def otp(request):
-    return render(request,'login1.html')
+# def otp(request):
+#     if request.method == 'POST':
+#         email = request.POST['email']
+#         try:
+#             user = User.objects.get(email=email)
+#         except User.DoesNotExist:
+#             return render(request,'signup.html')
 
 # @login_required(login_url='login')  #checks if the user is authenticated and redirects them to the login page if they are not. The login_url='login' argument ensures that it uses the correct login URL.
 # def candidateHome(request):
@@ -176,21 +181,67 @@ def testPaper(request):
     context = {'Questions': que_list}
     return render(request, 'test-paper.html', context)
 
-    
-
-
 def calcTestRes(request):
     if 'username' not in request.session.keys():
         return redirect('login')
     total_attempt = 0
     total_right = 0
-    
+    total_wrong = 0
+    test_score = 0
+    qid_list = []
+    for i in request.POST:
+        if i.startswith('q_no'):  #data send through hidden input
+            qid_list.append(int(request.POST[i]))  #aim is to know the id of the submitted questions
+    for n in qid_list:
+        question = Questions.objects.get(que_id = n)  #want to fetch those questions which came in the question paper from database
+        try:
+            if question.correct_ans == request.POST['q'+str(n)]:
+                total_right += 1
+            else:
+                total_wrong += 1
+            total_attempt += 1
+        # except:
+        #     pass
+        except Exception as e:
+                # Log any other unexpected errors for debugging
+                print(f"Error processing question {n}: {e}")
+    test_score = (total_right-total_wrong)/len(qid_list)*10
+    #to store result in result table
+    result = Result()  #made object
+    result.username = Candidate.objects.get(username = request.session['username'])  #since foreign key,we have to assign object from candidate table
+    result.attempts = total_attempt
+    result.right_attempts = total_right
+    result.wrong_attempts = total_wrong
+    result.test_score = test_score
+    result.save()
+    #to make changes in candidate table
+    candidate = Candidate.objects.get(username = request.session['username'])   #to make changes in logged in candidate
+    candidate.test_attempted += 1  #after giving test +1 attempt
+    candidate.test_score = (candidate.test_score*(candidate.test_attempted-1)+test_score)/candidate.test_attempted
+    candidate.save()
+    return redirect('result/')
+
 
 def testResHistory(request):
-    pass
+    #to fetch every rows with username which is logged in
+    if 'username' not in request.session.keys():
+        return redirect('login')
+    candidate = Candidate.objects.filter(username = request.session['username'])
+    results = Result.objects.filter(username_id = candidate[0].username)
+    #filter function always returns query set i.e collection of objects but we it will be giving 1 object cause it is 1 for now.
+    #get function gives 1 object
+    context = {'results':results, 'candidate':candidate}
+    return render(request,'candidate_history.html',context)
+
 
 def showTestRes(request):
-    pass
+    if 'username' not in request.session.keys():
+        return redirect('login')
+    #fetch latest result from result table
+    # result = Result.objects.filter(username = Candidate.objects.get(username = request.session['username'])).latest('res_id')
+    result = Result.objects.filter(res_id = Result.objects.latest('res_id').res_id,username_id = request.session['username'])  #2 things are passed in filter = result_id and username of loggedin user
+    context = {'result':result}
+    return render(request, 'show_result.html',context)
 
 def logoutView(request):
     # logout(request)  #user object is in request
@@ -219,16 +270,6 @@ def logoutView(request):
 #         user_id = request.session['user_id']
 #         user = Candidate.objects.get(id=user_id)
 #         return render(request, 'test-paper.html', {'user': user})
-#     else:
-#         return redirect('login.html')
-
-# def calcTestRes(request):
-#     if 'username' in request.session:
-#         # Get the user's details from the session
-#         username = request.session['username']
-#         user_id = request.session['user_id']
-#         user = Candidate.objects.get(id=user_id)
-#         return render(request, 'calc-test-res.html', {'user': user})
 #     else:
 #         return redirect('login.html')
 

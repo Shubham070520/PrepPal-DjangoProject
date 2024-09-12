@@ -1,0 +1,70 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exam Preparation</title>
+     <link rel ="stylesheet" href="../static/css/mystyle1.css">
+     <link rel="stylesheet" href="../static/css/bootstrap.min.css">
+
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-brand">
+            <a href="#"><img src="../static/images/copy.png" alt="Logo" class="logo"></a>
+            <a href="#" class="brand-name">PrepPal</a>
+        </div>
+        <ul class="navbar-menu">
+            <!-- <li><a href="#">Exams</a></li> -->
+            <li class="dropdown">
+                <a href="#" class="dropbtn">Exams</a>
+                    <div class="dropdown-content">
+                        <a href="#">Civil Services</a>
+                        <a href="#">SSC</a>
+                        <div class="dropdown">
+                            <a href="#" class="dropbtn">Defence Services</a>
+                            <div class="dropdown-content nested-dropdown">
+                                <a href="#">Combined Defence Services</a>
+                                <div class="nested-dropdown">
+                                    <a href="#">Indian Military Academy</a>
+                                    <a href="#">Officers Training Academy</a>
+                                </div>
+                                <a href="#">National Defence Academy</a>
+                                <a href="#">Coast Guard</a>
+                                <a href="#">Paramilitary Forces</a>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            <li><a href="#">Notes</a></li>
+            <li><a href="{% url 'App:test-history' %}">Test History</a></li>
+            <li><a href="#">Current Affairs</a></li>
+            <li><a href="#">Pass</a></li>
+            <li><a href="{% url 'App:logout' %}">Logout</a></li>
+        </ul>
+    </nav>
+    <h3>Here is your Result</h3>
+    <table>
+        <tr>
+            <th>Date</th>
+            <th>Time</th>
+            <th>Total Attempts</th>
+            <th>Right Attempts</th>
+            <th>Wrong Attempts</th>
+            <th>Test Score</th> 
+        </tr>
+        {% for result in results %}
+        <tr>
+            <td>{{result.date_attempted}}</td>
+            <td>{{result.time}}</td>
+            <td>{{result.attempts}}</td>
+            <td>{{result.right_attempts}}</td>
+            <td>{{result.wrong_attempts}}</td>
+            <td>{{result.test_score}}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+</body>
+</html>
