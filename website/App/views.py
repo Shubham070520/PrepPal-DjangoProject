@@ -7,7 +7,6 @@ from django.contrib.auth import authenticate,login,logout
 from django.db.models import Q  #to write min and max  values
 import random
 import re
-from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.hashers import make_password #Used Django's built-in make_password function to hash the password before storing it in the database.
 from django.core.mail import send_mail
@@ -15,7 +14,11 @@ from django.core.paginator import Paginator  #Django’s Paginator class can be 
 
 
 def welcome(request):
-    return render(request,'home.html')
+    registered_students_count = Candidate.objects.count()
+
+    return render(request,'home.html',{
+        'registered_students_count': registered_students_count,
+    })
 
 def candidateRegForm(request):
     return render (request,'signup.html')
@@ -101,8 +104,12 @@ def candidateRegistration(request):
 #             messages.error(request, 'Please fill in both username and password.')
 #             return redirect('App:login')
 #         # else:
+#         user = authenticate(username=u, password=p)
+#         user = User.objects.get(username=u)
+#         print(user.is_active)
+
+#         print('this is name of user',user)
 #         try:
-#             user = authenticate(username=u, password=p)
 #             print(f"Authenticated User: {user}")  #why it is showing none
 #             if user is not None:
 #                 login(request, user)  # This will set the session automatically
@@ -119,6 +126,35 @@ def candidateRegistration(request):
 #             return redirect('App:login')
 #     else: 
 #           return render(request, 'login.html')
+
+# def loginView(request):
+#     if request.method == 'POST':
+#         u = request.POST.get('username') 
+#         p = request.POST.get('password')
+        
+#         if not u or not p:
+#             messages.error(request, 'Please fill in both username and password.')
+#             return redirect('App:login')
+        
+#         # Check if user exists before authentication
+#         try:
+#             user = User.objects.get(username=u)
+#         except ObjectDoesNotExist:
+#             messages.error(request, 'No user with this username exists')
+#             return redirect('App:login')
+        
+#         # Authenticate user
+#         user = authenticate(username=u, password=p)
+#         if user is not None:
+#             login(request, user)
+#             request.session['name'] = user.username
+#             messages.success(request, 'Logged in successfully!')
+#             return render(request, 'App:home')
+#         else:
+#             messages.error(request, 'Invalid credentials')
+#             return redirect('App:login')
+#     else:
+#         return render(request, 'login.html')
 
 def loginView(request):
     if request.method == 'GET':
@@ -139,15 +175,8 @@ def loginView(request):
 #     if 'username' not in request.session.keys():
 #         return redirect('login')
 
-
-
-# def otp(request):
-#     if request.method == 'POST':
-#         email = request.POST['email']
-#         try:
-#             user = User.objects.get(email=email)
-#         except User.DoesNotExist:
-#             return render(request,'signup.html')
+def otp(request):
+            return render(request,'login1.html')
 
 # @login_required(login_url='login')  #checks if the user is authenticated and redirects them to the login page if they are not. The login_url='login' argument ensures that it uses the correct login URL.
 # def candidateHome(request):
