@@ -11,7 +11,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.hashers import make_password #Used Django's built-in make_password function to hash the password before storing it in the database.
 from django.core.mail import send_mail
 from django.core.paginator import Paginator  #Django’s Paginator class can be used to handle large numbers of questions more efficiently.
-
+import razorpay
 
 def welcome(request):
     registered_students_count = Candidate.objects.count()
@@ -227,7 +227,7 @@ def calcTestRes(request):
             if question.correct_ans == request.POST['q'+str(n)]:
                 total_right += 1
             else:
-                total_wrong += 1
+                total_wrong += 0.33
             total_attempt += 1
         # except:
         #     pass
@@ -321,6 +321,15 @@ def logoutView(request):
 #         return render(request, 'show-test-res.html', {'user': user})
 #     else:
 #         return redirect('login.html')
+
+def buypass(request):
+    if 'username' not in request.session.keys():
+        return redirect('login/')
+    client = razorpay.Client(auth=("rzp_test_FQnn3Glqg1rhvn", "vqmZMvBVFrUgCNxBr59YBr7C"))
+    data = { "amount": 500, "currency": "INR", "receipt": "" }
+    payment = client.order.create(data=data)
+    context = {'data' : payment}
+    return render(request,'payment.html',context)
 
 
 

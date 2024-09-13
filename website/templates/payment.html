@@ -1,0 +1,171 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exam Preparation</title>
+     <link rel ="stylesheet" href="../static/css/payment.css">
+     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+     <link rel="stylesheet" href="../static/css/bootstrap.min.css">
+
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-brand">
+            <a href="#"><img src="../static/images/copy.png" alt="Logo" class="logo"></a>
+            <a href="/" class="brand-name">PrepPal</a>
+        </div>
+        <ul class="navbar-menu">
+            <!-- <li><a href="#">Exams</a></li> -->
+            <li class="dropdown">
+                <a href="#" class="dropbtn">Exams</a>
+                <div class="dropdown-content">
+                    <a href="#">Civil Services</a>
+                    <a href="#">SSC</a>
+                    <!-- <a href="#">Defence Services</a> -->
+                    <a href="#" class="dropbtn">Defence Services</a>
+                    <div class="dropdown-content nested-dropdown">
+                        <a href="#">Combined Defence Services</a>
+                            <div class="nested-dropdown">
+                                <a href="#">Indian Military Academy</a>
+                                <a href="#">Officers Training Academy</a>
+                            </div>
+                        <a href="#">National Defence Academy</a>
+                        <a href="#">Coast Guard</a>
+                        <a href="#">Paramilitary Forces</a>
+                    </div>
+                </div>
+            </div>
+            </li>
+            <li><a href="#">Notes</a></li>
+            <li><a href="{% url 'App:test-history' %}">Test History</a></li>
+            <li><a href="#">Current Affairs</a></li>
+            <li><a href="{% url 'App:pass' %}">Pass</a></li>
+            <li><a href="{% url 'App:logout' %}">Logout</a></li>
+        </ul>
+    </nav>
+    <div class="container">
+        <div class="plan-benefits">
+            <h2>Plan Benefits</h2>
+            <ul>
+                <!-- <li>70,000+ Mock Test <span class="check">&#10003;</span></li>
+                <li>Unlimited Pro Live Test <span class="check">&#10003; -->
+                <li>Notes<span class="check">&#10003;</span></li>
+                <li>Unlimited Practice Pro Questions <span class="check">&#10003;</span></li>
+                <li>Previous Year Papers <span class="check">&#10003;</span></li>
+                <li>Unlimited Re-Attempt mode for All Tests <span class="check">&#10003;</span></li>
+            </ul>
+        </div>
+        <div class="plans">
+            <div class="pricing-plans">
+                <h4>Select your Pass Pro Plan:</h4>
+
+                <div class="plan-option">
+                    <input type="radio" name="plan" id="monthly" checked>
+                    <label for="monthly">
+                        <div class="plan-info">
+                            <span class="plan-title">Monthly Pass Pro</span>
+                            <span class="plan-validity">Valid for 31 Days</span>
+                        </div>
+                        <div class="plan-price">
+                            <span class="original-price">₹499</span>
+                            <!-- <span class="discounted-price">₹584</span> -->
+                            <!-- <p>Coupon Applied: You saved extra ₹65 on Monthly Pass Pro</p> -->
+                        </div>
+                    </label>
+                </div>
+                <div class="plan-option">
+                    <input type="radio" name="plan" id="6 Months" checked>
+                    <label for="6 Months">
+                        <div class="plan-info">
+                            <span class="plan-title">6 Months Pass</span>
+                            <span class="plan-validity">Valid for 180 Days</span>
+                        </div>
+                        <div class="plan-price">
+                            <span class="original-price">₹1499</span>
+                            <!-- <span class="discounted-price">₹629</span> -->
+                            <!-- <p>Coupon Applied: You saved extra ₹70 on Yearly Pass Pro</p> -->
+                        </div>
+                    </label>
+                </div>
+                <div class="plan-option">
+                    <input type="radio" name="plan" id="yearly" checked>
+                    <label for="yearly">
+                        <div class="plan-info">
+                            <span class="plan-title">Yearly Pass Pro</span>
+                            <span class="plan-validity">Valid for 365 Days</span>
+                        </div>
+                        <div class="plan-price">
+                            <span class="original-price">₹1999</span>
+                            <!-- <span class="discounted-price">₹629</span> -->
+                            <!-- <p>Coupon Applied: You saved extra ₹70 on Yearly Pass Pro</p> -->
+                        </div>
+                    </label>
+                </div>
+
+                <div class="plan-option">
+                    <input type="radio" name="plan" id="two-years">
+                    <label for="two-years">
+                        <div class="plan-info">
+                            <span class="plan-title">2 Years Pass Pro</span>
+                            <span class="plan-validity">Valid for 730 Days</span>
+                        </div>
+                        <div class="plan-price">
+                            <span class="original-price">₹2499</span>
+                            <!-- <span class="discounted-price">₹719</span> -->
+                            <!-- <p>Coupon Applied: You saved extra ₹80 on 2 Years Pass Pro</p> -->
+                        </div>
+                    </label>
+                </div>
+            </div>
+
+            <!-- <button class="buy-now-btn">Buy Pass</button> -->
+            <button class="buy-now-btn" id="rzp-button1">Buy Pass</button>
+        </div>
+    </div>
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+            <script>
+            var options = {
+                "key": "rzp_test_FQnn3Glqg1rhvn", // Enter the Key ID generated from the Dashboard
+                "amount": "{{ data.amount }}", // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+                "currency": "INR",
+                "name": "Acme Corp",
+                "description": "Test Transaction",
+                "image": "https://example.com/your_logo",
+                "order_id": "{{ data.id }}", //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+                "handler": function (response){
+                    // alert(response.razorpay_payment_id);
+                    // alert(response.razorpay_order_id);
+                    // alert(response.razorpay_signature)
+                    window.location.href="http://localhost:8000/pass"
+                },
+                "prefill": {
+                    "name": "Shubham Rane",
+                    "email": "shubhamrane016@gmail.com",
+                    "contact": "9594570090"
+                },
+                "notes": {
+                    "address": "Razorpay Corporate Office"
+                },
+                "theme": {
+                    "color": "#3399cc"
+                }
+            };
+            var rzp1 = new Razorpay(options);
+            rzp1.on('payment.failed', function (response){
+                    alert(response.error.code);
+                    alert(response.error.description);
+                    alert(response.error.source);
+                    alert(response.error.step);
+                    alert(response.error.reason);
+                    alert(response.error.metadata.order_id);
+                    alert(response.error.metadata.payment_id);
+            });
+            document.getElementById('rzp-button1').onclick = function(e){
+                rzp1.open();
+                e.preventDefault();
+            }
+            </script>
+</body>
+</html>

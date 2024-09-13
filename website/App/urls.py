@@ -17,4 +17,5 @@ urlpatterns = [
     path('test-History',views.testResHistory,name="test-history"),
     path('result/',views.showTestRes,name="showresult"),
     path('logout',views.logoutView,name="logout"),
+    path('pass',views.buypass , name="pass"),
 ]

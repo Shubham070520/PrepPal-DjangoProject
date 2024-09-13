@@ -1,0 +1,253 @@
+body {
+    background-image: url('../images/modern-tricolor-indian-flag-theme-watercolor-brush-stroke-design-background_1055-21416.jpg');
+    background-size: cover;            
+    background-repeat: no-repeat;    
+    background-position: center;     
+    background-attachment: fixed;    
+    height: 100vh;   
+}
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    /* background-color: #f7faff; */
+}
+
+
+.header {
+    padding: 20px;
+    text-align: center;
+    /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
+}
+
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+    width: 100%;
+}
+
+.navbar-brand {
+    display: flex;
+    align-items: center;
+}
+
+.logo {
+    height: 40px;
+    margin-right: 10px;
+    margin-left: 20px;
+}
+
+.brand-name {
+    font-size: 24px;
+    font-weight: bold;
+    /* color: #00b7eb; */
+    color:  #333;;
+    text-decoration: none;
+}
+
+.navbar-menu {
+    list-style: none;
+    display: flex;
+    justify-content: space-evenly;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+
+/* .navbar-menu li {
+    margin-left: 80px;
+    position : relative;
+    margin-right: 60px;
+} */
+
+.navbar-menu li {
+    margin: 0; /* Remove individual margins to avoid extra spacing */
+    padding: 0 10px; /* Adjust as per the spacing you want */
+    position: relative;
+}
+
+.navbar-menu a {
+    text-decoration: none;
+    color: #333;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.dropdown {
+    position: relative;
+}
+
+.dropbtn {
+    cursor: pointer;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    min-width: 160px;
+    z-index: 1;
+}
+
+.dropdown-content a {
+    padding: 10px 16px;
+    text-decoration: none;
+    display: block;
+    color: #333;
+    
+
+}
+
+.dropdown-content a:hover {
+    background-color: transparent;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown:hover .dropbtn {
+    color: #00b7eb;
+}
+
+
+
+.container {
+    display: flex;
+    justify-content: space-around;
+    padding: 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+    background-color: transparent;
+}
+
+.plan-benefits, .plans {
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.plan-benefits {
+    width: 30%;
+    background-color: transparent;
+}
+
+.plan-benefits h2 {
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+.plan-benefits ul {
+    list-style: none;
+    padding: 0;
+}
+
+.plan-benefits li {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    font-weight: 500;
+}
+
+.check {
+    color: green;
+    font-weight: 700;
+}
+
+.plans {
+    width: 60%;
+    background-color: transparent;
+}
+
+.special-offer h3 {
+    color: #333;
+}
+
+.coupon {
+    background: #eef9f1;
+    border: 1px solid #d4f1df;
+    padding: 10px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 5px;
+}
+
+.discount {
+    font-weight: 700;
+    color: #34a853;
+}
+
+.remove-coupon {
+    background-color: #f4f4f4;
+    border: none;
+    padding: 8px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.pricing-plans h4 {
+    margin-bottom: 20px;
+    font-weight: 700;
+}
+
+.plan-option {
+    border: 1px solid #dcdcdc;
+    padding: 20px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.plan-info {
+    font-weight: 500;
+}
+
+.plan-title {
+    font-size: 1.2em;
+    font-weight: 700;
+}
+
+.plan-validity {
+    color: #888;
+}
+
+.plan-price {
+    text-align: right;
+}
+
+.original-price {
+    color: #888;
+    text-decoration: solid;
+}
+
+.buy-now-btn {
+    background-color: #00c853;
+    color: #fff;
+    padding: 15px 20px;
+    border: none;
+    width: 100%;
+    font-size: 1.2em;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.buy-now-btn:hover {
+    background-color: #00b247;
+}
+
+input[type="radio"] {
+    display: none;
+}
+
+input[type="radio"]:checked + label {
+    border: 2px solid #4CAF50;
+}

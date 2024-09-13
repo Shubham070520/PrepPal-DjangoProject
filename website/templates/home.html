@@ -6,14 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Exam Preparation</title>
      <link rel ="stylesheet" href="../static/css/mystyle.css">
-     <link rel="stylesheet" href="../static/css/bootstrap.min.css">
 
 </head>
 <body>
     <nav class="navbar">
         <div class="navbar-brand">
             <a href="#"><img src="../static/images/copy.png" alt="Logo" class="logo"></a>
-            <a href="/" class="brand-name">PrepPal</a>
+            <a href="{% url 'App:home' %}" class="brand-name">PrepPal</a>
         </div>
         <ul class="navbar-menu">
             <!-- <li><a href="#">Exams</a></li> -->
@@ -37,10 +36,10 @@
                 </div>
             </div>
             </li>
-            <li><a href="#">About Exams</a></li>
+            <li><a href="#">Notes</a></li>
             <li><a href="#">Test Series</a></li>
             <li><a href="#">Current Affairs</a></li>
-            <li><a href="#">Pass</a></li>
+            <li><a href="{% url 'App:pass' %}">Pass</a></li>
         </ul>
     </nav>
     <div class="header">
@@ -53,15 +52,15 @@
         <br>
         <br>
         <div class="app-buttons">
-            <a href="#"><img src="../static/images/images-removebg-preview.png" alt="UPSC"></a>
-            <a href="#"><img src="../static/images/cds-combined-defence-services-removebg-preview.png" alt="Combined Defence Services"></a>
-            <a href="#"><img src="../static/images/png-clipart-coat-of-arms-yellow-eagle-and-lion-indian-air-force-national-defence-academy-air-force-common-admission-test-medical-recruitment-s-emblem-logo-thumbnail-removebg-preview.png" alt="AFCAT"></a>
+            <a href="#"><img src="../static/images/upsc.png" alt="UPSC"></a>
+            <a href="#"><img src="../static/images/CDS.png" alt="Combined Defence Services"></a>
+            <a href="#"><img src="../static/images/afcat.png" alt="AFCAT"></a>
         </div>
     </div>
     <div class="stats">
         <div class="stat">
             <h3>Registered Students</h3>
-            <!-- <p>{{ registered_students_count }}</p>  Display the count here -->
+            <p>{{ registered_students_count }}</p>  <!--Display the count here -->
         </div>
     </div>
         <div class="stat">

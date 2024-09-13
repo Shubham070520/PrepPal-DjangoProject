@@ -14,6 +14,7 @@ class Candidate(models.Model):
 
 class Exam(models.Model):
     name = models.CharField(max_length=255)
+    exam_type = models.ImageField(upload_to='images',default=0)
 
     def __str__(self):
         return self.name
