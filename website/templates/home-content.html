@@ -18,7 +18,7 @@
         <ul class="navbar-menu">
             <!-- <li><a href="#">Exams</a></li> -->
             <li class="dropdown">
-                <a href="#" class="dropbtn">Exams</a>
+                <a href="/home" class="dropbtn">Exams</a>
                     <div class="dropdown-content">
                         <a href="#">Civil Services</a>
                         <a href="#">SSC</a>
@@ -37,7 +37,7 @@
                         </div>
                     </div>
                 </li>
-            <li><a href="#">Notes</a></li>
+            <li><a href="{% url 'App:notes' %}">Notes</a></li>
             <li><a href="{% url 'App:test-history' %}">Test History</a></li>
             <li><a href="#">Current Affairs</a></li>
             <li><a href="{% url 'App:pass' %}">Pass</a></li>
@@ -60,11 +60,12 @@
         <h3>Hello {{request.session.name}}, What are you practicing today ?</h3>
         </div>
         <div class="container">
+            {% for Exam in Exams %}    
             <div class="row">
                 <div class="col-md-4">
                     <div class="card transparent-card" style="width: 18rem;">
-                        <!-- <img src="../static/images/ssc.png" class="card-img-top" alt="..."> -->
-                        <img src="{{ Exam.exam_type.url }}" alt="image not available" class="card-img-top">
+                        <img src="../static/images/ssc.png" class="card-img-top" alt="...">
+                        <!-- <img src="{{ Exam.exam_type.url }}" alt="image not available" class="card-img-top"> -->
                         <div class="card-body">
                             <h5 class="card-title">SSC</h5>
                             <a href="{% url 'App:test-paper' %}?n=50" class="btn btn-primary">Go to Test-Series</a>
@@ -73,8 +74,8 @@
                 </div>
                 <div class="col-md-4">
                     <div class="card transparent-card" style="width: 18rem;">
-                        <!-- <img src="../static/images/nda.png" class="card-img-top" alt="..."> -->
-                        <img src="{{ Exam.exam_type.url }}" alt="image not available" class="card-img-top">
+                        <img src="../static/images/nda.png" class="card-img-top" alt="...">
+                        <!-- <img src="{{ Exam.exam_type.url }}" alt="image not available" class="card-img-top"> -->
                             <div class="card-body">
                                 <h5 class="card-title">National Defence Academy (Maths)</h5>
                                 <a href="{% url 'App:test-paper' %}?n=50" class="btn btn-primary">Go to Test-Series</a>  <!--appending data in url which goes through get method-->
@@ -83,8 +84,8 @@
                 </div>
                 <div class="col-md-4">
                     <div class="card transparent-card" style="width: 18rem;">
-                        <!-- <img src="../static/images/CDS.png" class="card-img-top" alt="..."> -->
-                        <img src="{{ Exam.exam_type.url }}" alt="image not available" class="card-img-top">
+                        <img src="../static/images/CDS.png" class="card-img-top" alt="...">
+                        <!-- <img src="{{ Exam.exam_type.url }}" alt="image not available" class="card-img-top"> -->
                             <div class="card-body">
                                 <h5 class="card-title">Combined Defence Services (IMA-MATHS)</h5>
                                 <a href="{% url 'App:test-paper' %}?n=50" class="btn btn-primary">Go to Test-Series</a>
@@ -93,8 +94,8 @@
                 </div>
                 <div class="col-md-4">
                     <div class="card transparent-card" style="width: 18rem;">
-                        <!-- <img src="../static/images/CDS.png" class="card-img-top" alt="..."> -->
-                        <img src="{{ Exam.exam_type.url }}" alt="image not available" class="card-img-top">
+                        <img src="../static/images/CDS.png" class="card-img-top" alt="...">
+                        <!-- <img src="{{ Exam.exam_type.url }}" alt="image not available" class="card-img-top"> -->
                             <div class="card-body">
                                 <h5 class="card-title">Combined Defence Services (OTA)</h5>
                                 <a href="{% url 'App:test-paper' %}?n=50" class="btn btn-primary">Go to Test-Series</a>
@@ -103,8 +104,8 @@
                 </div>
                 <div class="col-md-4">
                     <div class="card transparent-card" style="width: 18rem;">
-                        <!-- <img src="../static/images/afcat.png" class="card-img-top" alt="..."> -->
-                        <img src="{{ Exam.exam_type.url }}" alt="image not available" class="card-img-top">
+                        <img src="../static/images/afcat.png" class="card-img-top" alt="...">
+                        <!-- <img src="{{ Exam.exam_type.url }}" alt="image not available" class="card-img-top"> -->
                             <div class="card-body">
                                 <h5 class="card-title">AFCAT</h5>
                                 <a href="{% url 'App:test-paper' %}?n=50" class="btn btn-primary">Go to Test-Series</a>
@@ -113,8 +114,8 @@
                 </div>
                 <div class="col-md-4">
                     <div class="card transparent-card" style="width: 18rem;">
-                        <!-- <img src="../static/images/upsc.png" class="card-img-top" alt="..."> -->
-                        <img src="{{ Exam.exam_type.url }}" alt="image not available" class="card-img-top">
+                        <img src="../static/images/upsc.png" class="card-img-top" alt="...">
+                        <!-- <img src="{{ Exam.exam_type.url }}" alt="image not available" class="card-img-top"> -->
                             <div class="card-body">
                                 <h5 class="card-title">Civil Services</h5>
                                 <a href="{% url 'App:test-paper' %}?n=50" class="btn btn-primary">Go to Test-Series</a>
@@ -122,4 +123,7 @@
                     </div>
                 </div>
             </div>
-        </div>      
+            {% endfor %}
+        </div>  
+        </body>
+</html>    

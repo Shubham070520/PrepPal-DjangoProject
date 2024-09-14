@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect
 from django.http import HttpResponse,HttpResponseRedirect
-from App.models import Candidate,Questions,Result,Plans
+from App.models import Candidate,Questions,Result,Plans,Exam,Notes
 from django.contrib.auth.models import User
 from django.contrib import messages #to add message
 from django.contrib.auth import authenticate,login,logout
@@ -192,6 +192,8 @@ def candidateHome(request):
     if 'username' not in request.session.keys():
         return redirect('login')
     else:
+        data = Exam.objects.all()
+        context = {'exams': data}
         return render(request, 'home-content.html')
 
 def testPaper(request):
@@ -309,7 +311,7 @@ def testSeries(request):
 #     return render(request, 'payment.html', context)
 
 # rzp_test_FQnn3Glqg1rhvn
-from django.views.decorators.csrf import csrf_exempt
+# from django.views.decorators.csrf import csrf_exempt
 
 # Initialize Razorpay client with your Razorpay credentials
 # razorpay_client = razorpay.Client(auth=(settings.rzp_test_FQnn3Glqg1rhvn, settings.vqmZMvBVFrUgCNxBr59YBr7C))
@@ -333,7 +335,7 @@ from django.views.decorators.csrf import csrf_exempt
 
 #         # Pass this data to the template
 #         context = {
-#             'razorpay_key_id': settings.rzp_test_FQnn3Glqg1rhvn,  # Your Razorpay Key ID
+#             'razorpay_key_id': settings.rzp_test_FQnn3Glqg1rhvn,
 #             'amount': plan_amount,  # Amount in paise
 #             'order_id': razorpay_order_id,  # The generated Razorpay order ID
 #             'plan_name': plan_name,  # Selected plan name
@@ -343,4 +345,23 @@ from django.views.decorators.csrf import csrf_exempt
 #     return render(request, 'payment.html')
 
 
+# from .forms import DocumentForm
+# from .models import Document
+
+# def upload_document(request):
+#     if request.method == 'POST':
+#         form = DocumentForm(request.POST, request.FILES)
+#         if form.is_valid():
+#             form.save()
+#             return redirect('success')  # Replace 'success' with your success URL or view
+#     else:
+#         form = DocumentForm()
+
+#     return render(request, 'upload.html', {'form': form})
+
+def notes(request):
+    if 'username' not in request.session.keys():
+        return redirect('login/')
+    notes = Notes.objects.all()
+    return render(request,'notes.html',{'notes': notes})
 

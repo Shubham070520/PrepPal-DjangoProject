@@ -19,5 +19,6 @@ urlpatterns = [
     path('logout',views.logoutView,name="logout"),
     path('pass',views.buypass , name="pass"),
     path('testseries',views.testSeries, name ="test"),
-    
+    path('notes',views.notes,name="notes"),
 ]
+urlpatterns += static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)

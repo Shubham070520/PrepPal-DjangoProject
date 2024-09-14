@@ -1,5 +1,5 @@
 from django.contrib import admin
-from App.models import Candidate,Questions,Result,Exam,Plans
+from App.models import Candidate,Questions,Result,Exam,Plans,Notes
 # Register your models here.
 
 class CandidateAdmin(admin.ModelAdmin):
@@ -34,3 +34,8 @@ class PlansAdmin(admin.ModelAdmin):
 
 admin.site.register(Plans,PlansAdmin)
 
+
+class NotesAdmin(admin.ModelAdmin):
+    list_display = ['title']
+
+admin.site.register(Notes,NotesAdmin)

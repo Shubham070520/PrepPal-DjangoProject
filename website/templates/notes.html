@@ -1,0 +1,72 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exam Preparation</title>
+     <link rel ="stylesheet" href="../static/css/notes.css">
+     <link rel="stylesheet" href="../static/css/bootstrap.min.css">
+
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-brand">
+            <a href="#"><img src="../static/images/copy.png" alt="Logo" class="logo"></a>
+            <a href="{% url 'App:homelog' %}" class="brand-name">PrepPal</a>
+        </div>
+        <ul class="navbar-menu">
+            <!-- <li><a href="#">Exams</a></li> -->
+            <li class="dropdown">
+                <a href="/home" class="dropbtn">Exams</a>
+                    <div class="dropdown-content">
+                        <a href="#">Civil Services</a>
+                        <a href="#">SSC</a>
+                        <div class="dropdown">
+                            <a href="#" class="dropbtn">Defence Services</a>
+                            <div class="dropdown-content nested-dropdown">
+                                <a href="#">Combined Defence Services</a>
+                                <div class="nested-dropdown">
+                                    <a href="#">Indian Military Academy</a>
+                                    <a href="#">Officers Training Academy</a>
+                                </div>
+                                <a href="#">National Defence Academy</a>
+                                <a href="#">Coast Guard</a>
+                                <a href="#">Paramilitary Forces</a>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            <li><a href="{% url 'App:notes' %}">Notes</a></li>
+            <li><a href="{% url 'App:test-history' %}">Test History</a></li>
+            <li><a href="#">Current Affairs</a></li>
+            <li><a href="{% url 'App:pass' %}">Pass</a></li>
+            <li><a href="{% url 'App:logout' %}">Logout</a></li>
+        </ul>
+    </nav>
+    {% if messages %}
+    <ul class="messages">
+    {% for message in messages %}
+    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+    </ul>
+    {% endif %}
+    <div class="header">
+        <br>
+        <h1>One Destination for Complete Exam Preparation</h1>
+        <br>
+        <p>Learn &#9654; Practice &#9654; Improve &#9654; Succeed</p>
+        <br>
+        <h3>Hello {{request.session.name}}, What are you practicing today ?</h3>
+    </div>
+    <h3>Notes</h3>
+    <ul>
+        {% for note in notes %}
+        <li>
+            <h2>{{ note.title }}</h2>
+            <a href="{{ note.pdf.url }}" target="_blank">Download PDF</a>
+        </li>
+        {% empty %}
+        <li>No notes available.</li>
+        {% endfor %}
+    </ul>

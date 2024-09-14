@@ -18,7 +18,7 @@
         <ul class="navbar-menu">
             <!-- <li><a href="#">Exams</a></li> -->
             <li class="dropdown">
-                <a href="#" class="dropbtn">Exams</a>
+                <a href="/home" class="dropbtn">Exams</a>
                     <div class="dropdown-content">
                         <a href="#">Civil Services</a>
                         <a href="#">SSC</a>
@@ -37,7 +37,7 @@
                         </div>
                     </div>
                 </li>
-            <li><a href="#">Notes</a></li>
+            <li><a href="{% url 'App:notes' %}">Notes</a></li>
             <li><a href="{% url 'App:test-history' %}">Test History</a></li>
             <li><a href="#">Current Affairs</a></li>
             <li><a href="{% url 'App:pass' %}">Pass</a></li>
