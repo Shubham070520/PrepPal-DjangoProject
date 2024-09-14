@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect
 from django.http import HttpResponse,HttpResponseRedirect
-from App.models import Candidate,Questions,Result
+from App.models import Candidate,Questions,Result,Plans
 from django.contrib.auth.models import User
 from django.contrib import messages #to add message
 from django.contrib.auth import authenticate,login,logout
@@ -171,9 +171,11 @@ def loginView(request):
             request.session['name'] = c[0].name
             return redirect('App:home')
     
-# def welcome1(request):
-#     if 'username' not in request.session.keys():
-#         return redirect('login')
+def homelog(request):
+    if 'username' not in request.session.keys():
+        return redirect('login')
+    return render(request,'home-content.html')
+    
 
 def otp(request):
             return render(request,'login1.html')
@@ -282,54 +284,63 @@ def logoutView(request):
     return redirect('/login')
 
 
-# def candidateHome(request):
-#     if 'username' in request.session:
-#         # Get the user's details from the session
-#         username = request.session['username']
-#         user_id = request.session['user_id']
-#         user = Candidate.objects.get(id=user_id)
-#         return render(request, 'home-content.html', {'user': user})
-#     else:
-#         return redirect('login.html')
-
-# def testPaper(request):
-#     if 'username' in request.session:
-#         # Get the user's details from the session
-#         username = request.session['username']
-#         user_id = request.session['user_id']
-#         user = Candidate.objects.get(id=user_id)
-#         return render(request, 'test-paper.html', {'user': user})
-#     else:
-#         return redirect('login.html')
-
-# def testResHistory(request):
-#     if 'username' in request.session:
-#         # Get the user's details from the session
-#         username = request.session['username']
-#         user_id = request.session['user_id']
-#         user = Candidate.objects.get(id=user_id)
-#         return render(request, 'test-res-history.html', {'user': user})
-#     else:
-#         return redirect('login.html')
-
-# def showTestRes(request):
-#     if 'username' in request.session:
-#         # Get the user's details from the session
-#         username = request.session['username']
-#         user_id = request.session['user_id']
-#         user = Candidate.objects.get(id=user_id)
-#         return render(request, 'show-test-res.html', {'user': user})
-#     else:
-#         return redirect('login.html')
-
 def buypass(request):
     if 'username' not in request.session.keys():
         return redirect('login/')
+    # plans = Plans.objects.all()
+    # context = {'plans' : plans}
     client = razorpay.Client(auth=("rzp_test_FQnn3Glqg1rhvn", "vqmZMvBVFrUgCNxBr59YBr7C"))
     data = { "amount": 500, "currency": "INR", "receipt": "" }
     payment = client.order.create(data=data)
     context = {'data' : payment}
     return render(request,'payment.html',context)
+
+
+def testSeries(request):
+    if 'username' not in request.session.keys():
+        return redirect('login/')
+    return render(request,'home-content.html')
+
+# def payment_view(request):
+#     context = {
+#         'amount': 1000,  # 1000 paise = 10 INR (as an example)
+#         'order_id': 'order_9A33XWu170gUtm',  # Replace with generated Razorpay order ID
+#     }
+#     return render(request, 'payment.html', context)
+
+# rzp_test_FQnn3Glqg1rhvn
+from django.views.decorators.csrf import csrf_exempt
+
+# Initialize Razorpay client with your Razorpay credentials
+# razorpay_client = razorpay.Client(auth=(settings.rzp_test_FQnn3Glqg1rhvn, settings.vqmZMvBVFrUgCNxBr59YBr7C))
+
+# @csrf_exempt  # Use this decorator if you're using Razorpay's callback feature
+# def payment_view(request):
+#     if request.method == 'POST':
+#         # Get the selected plan amount from the form (in paise)
+#         plan_amount = int(request.POST.get('plan_amount'))  # Example: 1000 paise = ₹10
+#         plan_name = request.POST.get('plan_name')  # Example: "Monthly Pass Pro"
+
+#         # Create a Razorpay order using the selected amount
+#         razorpay_order = razorpay_client.order.create({
+#             "amount": plan_amount,  # Amount in paise
+#             "currency": "INR",
+#             "payment_capture": 1  # Auto-capture the payment
+#         })
+
+#         # Get the generated order ID
+#         razorpay_order_id = razorpay_order['id']
+
+#         # Pass this data to the template
+#         context = {
+#             'razorpay_key_id': settings.rzp_test_FQnn3Glqg1rhvn,  # Your Razorpay Key ID
+#             'amount': plan_amount,  # Amount in paise
+#             'order_id': razorpay_order_id,  # The generated Razorpay order ID
+#             'plan_name': plan_name,  # Selected plan name
+#         }
+#         return render(request, 'payment.html', context)
+    
+#     return render(request, 'payment.html')
 
 
 

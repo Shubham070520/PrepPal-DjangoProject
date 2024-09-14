@@ -13,7 +13,7 @@
     <nav class="navbar">
         <div class="navbar-brand">
             <a href="#"><img src="../static/images/copy.png" alt="Logo" class="logo"></a>
-            <a href="#" class="brand-name">PrepPal</a>
+            <a href="{% url 'App:homelog' %}" class="brand-name">PrepPal</a>
         </div>
         <ul class="navbar-menu">
             <!-- <li><a href="#">Exams</a></li> -->
@@ -63,7 +63,8 @@
             <div class="row">
                 <div class="col-md-4">
                     <div class="card transparent-card" style="width: 18rem;">
-                        <img src="../static/images/ssc.png" class="card-img-top" alt="...">
+                        <!-- <img src="../static/images/ssc.png" class="card-img-top" alt="..."> -->
+                        <img src="{{ Exam.exam_type.url }}" alt="image not available" class="card-img-top">
                         <div class="card-body">
                             <h5 class="card-title">SSC</h5>
                             <a href="{% url 'App:test-paper' %}?n=50" class="btn btn-primary">Go to Test-Series</a>
@@ -72,7 +73,8 @@
                 </div>
                 <div class="col-md-4">
                     <div class="card transparent-card" style="width: 18rem;">
-                        <img src="../static/images/nda.png" class="card-img-top" alt="...">
+                        <!-- <img src="../static/images/nda.png" class="card-img-top" alt="..."> -->
+                        <img src="{{ Exam.exam_type.url }}" alt="image not available" class="card-img-top">
                             <div class="card-body">
                                 <h5 class="card-title">National Defence Academy (Maths)</h5>
                                 <a href="{% url 'App:test-paper' %}?n=50" class="btn btn-primary">Go to Test-Series</a>  <!--appending data in url which goes through get method-->
@@ -81,7 +83,8 @@
                 </div>
                 <div class="col-md-4">
                     <div class="card transparent-card" style="width: 18rem;">
-                        <img src="../static/images/CDS.png" class="card-img-top" alt="...">
+                        <!-- <img src="../static/images/CDS.png" class="card-img-top" alt="..."> -->
+                        <img src="{{ Exam.exam_type.url }}" alt="image not available" class="card-img-top">
                             <div class="card-body">
                                 <h5 class="card-title">Combined Defence Services (IMA-MATHS)</h5>
                                 <a href="{% url 'App:test-paper' %}?n=50" class="btn btn-primary">Go to Test-Series</a>
@@ -90,7 +93,8 @@
                 </div>
                 <div class="col-md-4">
                     <div class="card transparent-card" style="width: 18rem;">
-                        <img src="../static/images/CDS.png" class="card-img-top" alt="...">
+                        <!-- <img src="../static/images/CDS.png" class="card-img-top" alt="..."> -->
+                        <img src="{{ Exam.exam_type.url }}" alt="image not available" class="card-img-top">
                             <div class="card-body">
                                 <h5 class="card-title">Combined Defence Services (OTA)</h5>
                                 <a href="{% url 'App:test-paper' %}?n=50" class="btn btn-primary">Go to Test-Series</a>
@@ -99,7 +103,8 @@
                 </div>
                 <div class="col-md-4">
                     <div class="card transparent-card" style="width: 18rem;">
-                        <img src="../static/images/afcat.png" class="card-img-top" alt="...">
+                        <!-- <img src="../static/images/afcat.png" class="card-img-top" alt="..."> -->
+                        <img src="{{ Exam.exam_type.url }}" alt="image not available" class="card-img-top">
                             <div class="card-body">
                                 <h5 class="card-title">AFCAT</h5>
                                 <a href="{% url 'App:test-paper' %}?n=50" class="btn btn-primary">Go to Test-Series</a>
@@ -108,7 +113,8 @@
                 </div>
                 <div class="col-md-4">
                     <div class="card transparent-card" style="width: 18rem;">
-                        <img src="../static/images/upsc.png" class="card-img-top" alt="...">
+                        <!-- <img src="../static/images/upsc.png" class="card-img-top" alt="..."> -->
+                        <img src="{{ Exam.exam_type.url }}" alt="image not available" class="card-img-top">
                             <div class="card-body">
                                 <h5 class="card-title">Civil Services</h5>
                                 <a href="{% url 'App:test-paper' %}?n=50" class="btn btn-primary">Go to Test-Series</a>

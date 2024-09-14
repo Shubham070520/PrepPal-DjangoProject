@@ -14,7 +14,7 @@
     <nav class="navbar">
         <div class="navbar-brand">
             <a href="#"><img src="../static/images/copy.png" alt="Logo" class="logo"></a>
-            <a href="/" class="brand-name">PrepPal</a>
+            <a href="{% url 'App:homelog' %}" class="brand-name">PrepPal</a>
         </div>
         <ul class="navbar-menu">
             <!-- <li><a href="#">Exams</a></li> -->
@@ -60,23 +60,20 @@
         <div class="plans">
             <div class="pricing-plans">
                 <h4>Select your Pass Pro Plan:</h4>
-
                 <div class="plan-option">
-                    <input type="radio" name="plan" id="monthly" checked>
-                    <label for="monthly">
+                    <input type="radio" name="plan" id="Monthly pass" data-amount="49900" data-title="Monthly pass" checked>
+                    <label for="Monthly pass">
                         <div class="plan-info">
-                            <span class="plan-title">Monthly Pass Pro</span>
+                            <span class="plan-title">Monthly Pass</span>
                             <span class="plan-validity">Valid for 31 Days</span>
                         </div>
                         <div class="plan-price">
-                            <span class="original-price">₹499</span>
-                            <!-- <span class="discounted-price">₹584</span> -->
-                            <!-- <p>Coupon Applied: You saved extra ₹65 on Monthly Pass Pro</p> -->
+                            <span class="original-price">499</span>
                         </div>
                     </label>
                 </div>
                 <div class="plan-option">
-                    <input type="radio" name="plan" id="6 Months" checked>
+                    <input type="radio" name="plan" id="6 Months" data-amount="149900" data-title="6 Months Pass" checked>
                     <label for="6 Months">
                         <div class="plan-info">
                             <span class="plan-title">6 Months Pass</span>
@@ -84,40 +81,77 @@
                         </div>
                         <div class="plan-price">
                             <span class="original-price">₹1499</span>
-                            <!-- <span class="discounted-price">₹629</span> -->
-                            <!-- <p>Coupon Applied: You saved extra ₹70 on Yearly Pass Pro</p> -->
                         </div>
                     </label>
                 </div>
                 <div class="plan-option">
-                    <input type="radio" name="plan" id="yearly" checked>
+                    <input type="radio" name="plan" id="yearly" data-amount="199900" data-title="Yearly Pass Pro" checked>
                     <label for="yearly">
                         <div class="plan-info">
-                            <span class="plan-title">Yearly Pass Pro</span>
+                            <span class="plan-title">Yearly Pass</span>
                             <span class="plan-validity">Valid for 365 Days</span>
                         </div>
                         <div class="plan-price">
                             <span class="original-price">₹1999</span>
-                            <!-- <span class="discounted-price">₹629</span> -->
-                            <!-- <p>Coupon Applied: You saved extra ₹70 on Yearly Pass Pro</p> -->
                         </div>
                     </label>
                 </div>
 
                 <div class="plan-option">
-                    <input type="radio" name="plan" id="two-years">
+                    <input type="radio" name="plan" id="two-years" data-amount="249900" data-title="2 Years Pass Pro">
                     <label for="two-years">
                         <div class="plan-info">
-                            <span class="plan-title">2 Years Pass Pro</span>
+                            <span class="plan-title">2 Years Pass</span>
                             <span class="plan-validity">Valid for 730 Days</span>
                         </div>
                         <div class="plan-price">
                             <span class="original-price">₹2499</span>
-                            <!-- <span class="discounted-price">₹719</span> -->
-                            <!-- <p>Coupon Applied: You saved extra ₹80 on 2 Years Pass Pro</p> -->
                         </div>
                     </label>
                 </div>
+                <!-- <div class="plans">
+                    <div class="pricing-plans">
+                        <h4>Select your Pass Pro Plan:</h4>
+                
+                        {% for plan in plans %}
+                        <div class="plan-option">
+                            <input type="radio" name="plan" id="{{ Plans.plan_type|slugify }}" data-amount="{{ Plans.price }}00" data-title="{{ Plans.plan_type }}" {% if forloop.first %}checked{% endif %}>
+                            <label for="{{ plans.plan_type|slugify }}">
+                                <div class="plan-info">
+                                    <span class="plan-title">{{ Plan.plan_type }}</span>
+                                    <span class="plan-validity">
+                                        {% if plan.plan_type == "Monthly Pass" %}
+                                            Valid for 31 Days
+                                        {% elif plan.plan_type == "6 Months Pass" %}
+                                            Valid for 180 Days
+                                        {% elif plan.plan_type == "Yearly Pass" %}
+                                            Valid for 365 Days
+                                        {% elif plan.plan_type == "2 Years Pass" %}
+                                            Valid for 730 Days
+                                        {% endif %}
+                                    </span>
+                                </div>
+                                <div class="plan-price">
+                                    <span class="original-price">₹{{ Plans.price }}</span>
+                                </div>
+                            </label>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                
+                Hidden input to store the selected plan's amount -->
+                <!-- <input type="hidden" name="plan_amount" id="plan_amount" value="{{ Plans.0.price }}00">
+                
+                <script>
+                    // JavaScript to update the hidden amount input when a plan is selected
+                    document.querySelectorAll('input[name="plan"]').forEach((radio) => {
+                        radio.addEventListener('change', function() {
+                            document.getElementById('plan_amount').value = this.getAttribute('data-amount');
+                        });
+                    });
+                </script> -->
+                
             </div>
 
             <!-- <button class="buy-now-btn">Buy Pass</button> -->
@@ -126,14 +160,22 @@
     </div>
     <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
             <script>
+                document.getElementById('rzp-button1').onclick = function(e) {
+        // Get the selected plan
+            var selectedPlan = document.querySelector('input[name="plan"]:checked');
+
+        // Get the amount (in paise) and plan title from the selected radio button
+            var amount = selectedPlan.getAttribute('data-amount');  // Amount in paise
+            var planTitle = selectedPlan.getAttribute('data-title'); // Plan title
+
             var options = {
                 "key": "rzp_test_FQnn3Glqg1rhvn", // Enter the Key ID generated from the Dashboard
-                "amount": "{{ data.amount }}", // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+                "amount": "{{ amount }}", // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
                 "currency": "INR",
-                "name": "Acme Corp",
-                "description": "Test Transaction",
+                "name": planTitle,
+                "description": "Payment for " + planTitle,
                 "image": "https://example.com/your_logo",
-                "order_id": "{{ data.id }}", //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+                "order_id": "{{ order.id }}", //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
                 "handler": function (response){
                     // alert(response.razorpay_payment_id);
                     // alert(response.razorpay_order_id);
@@ -162,7 +204,6 @@
                     alert(response.error.metadata.order_id);
                     alert(response.error.metadata.payment_id);
             });
-            document.getElementById('rzp-button1').onclick = function(e){
                 rzp1.open();
                 e.preventDefault();
             }

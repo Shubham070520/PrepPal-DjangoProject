@@ -50,4 +50,9 @@ class Result(models.Model):
 #     def generate_otp(self):
 #         return str(random.randint(100000, 999999))
 
+class Plans(models.Model):
+    price = models.IntegerField()
+    plan_type = models.CharField(max_length=255,default='Monthly Pass')
 
+    def __str__(self):
+        return self.plan_type

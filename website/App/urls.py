@@ -6,7 +6,7 @@ app_name= 'App'   # Define app name for namespacing
 
 urlpatterns = [
     path('',views.welcome,name="welcome"),  #http://127.0.0.1:8000/
-    # path('homelog/',views.welcome1,name="welcome1"), #after login
+    path('homelog/',views.homelog,name="homelog"), #after login
     path('candidateRegistration',views.candidateRegForm,name="candidateRegistration"),   #signup.html ,name="registrationForm"
     path('store-candidate',views.candidateRegistration,name="store-candidate"), #name='store-candidate'
     path('login/' ,views.loginView, name="login"), 
@@ -18,4 +18,6 @@ urlpatterns = [
     path('result/',views.showTestRes,name="showresult"),
     path('logout',views.logoutView,name="logout"),
     path('pass',views.buypass , name="pass"),
+    path('testseries',views.testSeries, name ="test"),
+    
 ]

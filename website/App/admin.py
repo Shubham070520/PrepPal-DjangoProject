@@ -1,5 +1,5 @@
 from django.contrib import admin
-from App.models import Candidate,Questions,Result,Exam
+from App.models import Candidate,Questions,Result,Exam,Plans
 # Register your models here.
 
 class CandidateAdmin(admin.ModelAdmin):
@@ -28,4 +28,9 @@ class ExamAdmin(admin.ModelAdmin):
     list_filter = ['name']
     
 admin.site.register(Exam,ExamAdmin)
+
+class PlansAdmin(admin.ModelAdmin):
+    list_display = ['price','plan_type']
+
+admin.site.register(Plans,PlansAdmin)
 
