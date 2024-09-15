@@ -168,7 +168,7 @@ body {
     color: #333;
 }
 
-.coupon {
+/* .coupon {
     background: #eef9f1;
     border: 1px solid #d4f1df;
     padding: 10px;
@@ -190,7 +190,7 @@ body {
     padding: 8px;
     border-radius: 5px;
     cursor: pointer;
-}
+} */
 
 .pricing-plans h4 {
     margin-bottom: 20px;

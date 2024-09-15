@@ -194,7 +194,7 @@ def candidateHome(request):
     else:
         data = Exam.objects.all()
         context = {'exams': data}
-        return render(request, 'home-content.html')
+        return render(request, 'home-content.html',context)
 
 def testPaper(request):
     if 'username' not in request.session.keys():
@@ -287,14 +287,16 @@ def logoutView(request):
 
 
 def buypass(request):
+    context = {}
     if 'username' not in request.session.keys():
         return redirect('login/')
-    # plans = Plans.objects.all()
-    # context = {'plans' : plans}
+    plans = Plans.objects.all()
+    context['plans'] = plans
     client = razorpay.Client(auth=("rzp_test_FQnn3Glqg1rhvn", "vqmZMvBVFrUgCNxBr59YBr7C"))
-    data = { "amount": 500, "currency": "INR", "receipt": "" }
+    data = { "amount": "50000", "currency": "INR", "receipt": "" }
     payment = client.order.create(data=data)
-    context = {'data' : payment}
+    context['data'] = payment
+    # context = {'data' : payment}
     return render(request,'payment.html',context)
 
 
@@ -343,21 +345,6 @@ def testSeries(request):
 #         return render(request, 'payment.html', context)
     
 #     return render(request, 'payment.html')
-
-
-# from .forms import DocumentForm
-# from .models import Document
-
-# def upload_document(request):
-#     if request.method == 'POST':
-#         form = DocumentForm(request.POST, request.FILES)
-#         if form.is_valid():
-#             form.save()
-#             return redirect('success')  # Replace 'success' with your success URL or view
-#     else:
-#         form = DocumentForm()
-
-#     return render(request, 'upload.html', {'form': form})
 
 def notes(request):
     if 'username' not in request.session.keys():
