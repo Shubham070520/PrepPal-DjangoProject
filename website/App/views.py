@@ -7,6 +7,7 @@ from django.contrib.auth import authenticate,login,logout
 from django.db.models import Q  #to write min and max  values
 import random
 import re
+from django.db.models import Sum
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.hashers import make_password #Used Django's built-in make_password function to hash the password before storing it in the database.
 from django.core.mail import send_mail
@@ -15,9 +16,13 @@ import razorpay
 
 def welcome(request):
     registered_students_count = Candidate.objects.count()
-
+    # test_attempted = Candidate.objects.all()
+     # Sum of test_attempted for all candidates
+    total_tests_attempted = Candidate.objects.aggregate(total=Sum('test_attempted'))['total'] or 0
+    
     return render(request,'home.html',{
         'registered_students_count': registered_students_count,
+        'total_tests_attempted': total_tests_attempted,
     })
 
 def candidateRegForm(request):
@@ -178,7 +183,7 @@ def homelog(request):
     
 
 def otp(request):
-            return render(request,'login1.html')
+        return render(request,'login1.html')
 
 # @login_required(login_url='login')  #checks if the user is authenticated and redirects them to the login page if they are not. The login_url='login' argument ensures that it uses the correct login URL.
 # def candidateHome(request):
@@ -216,7 +221,7 @@ def testPaper(request):
 
 def calcTestRes(request):
     if 'username' not in request.session.keys():
-        return redirect('login')
+        return redirect('login/')
     total_attempt = 0
     total_right = 0
     total_wrong = 0
@@ -283,7 +288,7 @@ def logoutView(request):
     if 'username' in request.session.keys():
         del request.session['username']
         del request.session['name']
-    return redirect('/login')
+    return redirect('login/')
 
 
 def buypass(request):
@@ -293,7 +298,7 @@ def buypass(request):
     plans = Plans.objects.all()
     context['plans'] = plans
     client = razorpay.Client(auth=("rzp_test_FQnn3Glqg1rhvn", "vqmZMvBVFrUgCNxBr59YBr7C"))
-    data = { "amount": "50000", "currency": "INR", "receipt": "" }
+    data = { "amount": "50000", "currency": "INR", "receipt": "str(uuid.uuid4())","payment_capture": '1' }
     payment = client.order.create(data=data)
     context['data'] = payment
     # context = {'data' : payment}
@@ -332,19 +337,6 @@ def testSeries(request):
 #             "payment_capture": 1  # Auto-capture the payment
 #         })
 
-#         # Get the generated order ID
-#         razorpay_order_id = razorpay_order['id']
-
-#         # Pass this data to the template
-#         context = {
-#             'razorpay_key_id': settings.rzp_test_FQnn3Glqg1rhvn,
-#             'amount': plan_amount,  # Amount in paise
-#             'order_id': razorpay_order_id,  # The generated Razorpay order ID
-#             'plan_name': plan_name,  # Selected plan name
-#         }
-#         return render(request, 'payment.html', context)
-    
-#     return render(request, 'payment.html')
 
 def notes(request):
     if 'username' not in request.session.keys():

@@ -14,11 +14,11 @@ urlpatterns = [
     path('home',views.candidateHome,name="home"), #redirect after login
     path('test-Paper',views.testPaper,name="test-paper"),
     path('calc-Result',views.calcTestRes,name="calc-Result"),
-    path('test-History',views.testResHistory,name="test-history"),
+    path('test-history',views.testResHistory,name="test-history"),
     path('result/',views.showTestRes,name="showresult"),
     path('logout',views.logoutView,name="logout"),
     path('pass',views.buypass , name="pass"),
-    path('testseries',views.testSeries, name ="test"),
+    path('test',views.testSeries, name ="test"),
     path('notes',views.notes,name="notes"),
 ]
 urlpatterns += static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
