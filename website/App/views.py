@@ -236,14 +236,16 @@ def calcTestRes(request):
             if question.correct_ans == request.POST['q'+str(n)]:
                 total_right += 1
             else:
-                total_wrong += 0.33
+                total_wrong += 1
             total_attempt += 1
         # except:
         #     pass
         except Exception as e:
                 # Log any other unexpected errors for debugging
                 print(f"Error processing question {n}: {e}")
-    test_score = (total_right-total_wrong)/len(qid_list)*10
+    # test_score = (total_right-total_wrong)/len(qid_list)*10
+    test_score = (total_right-total_wrong)
+    
     #to store result in result table
     result = Result()  #made object
     result.username = Candidate.objects.get(username = request.session['username'])  #since foreign key,we have to assign object from candidate table
@@ -252,6 +254,7 @@ def calcTestRes(request):
     result.wrong_attempts = total_wrong
     result.test_score = test_score
     result.save()
+
     #to make changes in candidate table
     candidate = Candidate.objects.get(username = request.session['username'])   #to make changes in logged in candidate
     candidate.test_attempted += 1  #after giving test +1 attempt
