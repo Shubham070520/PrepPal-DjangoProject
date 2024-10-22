@@ -116,7 +116,7 @@ body {
 }
 
 .dropdown-content a:hover {
-    background-color: transparent;
+    background-color: whitesmoke;
 }
 
 .dropdown:hover .dropdown-content {

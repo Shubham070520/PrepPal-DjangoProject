@@ -19,9 +19,10 @@ class Exam(models.Model):
     def __str__(self):
         return self.name
 
+
 class Questions(models.Model):
-    exam = models.ForeignKey(Exam, on_delete=models.CASCADE,null=False,default=1)  #One exam can have many questions
-    que_id = models.BigAutoField(primary_key=True,auto_created=True)
+    exam = models.ForeignKey(Exam, on_delete=models.CASCADE,null=False)  #One exam can have many questions
+    que_id = models.BigAutoField(primary_key=True)
     que = models.TextField()
     opt_1 = models.CharField(max_length=255)
     opt_2 = models.CharField(max_length=255)
@@ -33,7 +34,7 @@ class Questions(models.Model):
         return self.que
 
 class Result(models.Model):
-    res_id = models.BigAutoField(primary_key=True,auto_created=True)
+    res_id = models.BigAutoField(primary_key=True)
     username = models.ForeignKey(Candidate,on_delete=models.CASCADE)
     date_attempted = models.DateTimeField(auto_now=True)  #date to be filled automatically
     time = models.TimeField(auto_now=True) #time to be filled automatically
@@ -41,14 +42,6 @@ class Result(models.Model):
     right_attempts = models.IntegerField()
     wrong_attempts = models.IntegerField()
     test_score = models.FloatField()
-
-# class OTP(models.Model):
-#     user = models.OneToOneField(User, on_delete=models.CASCADE)
-#     otp = models.CharField(max_length=6)
-#     created_at = models.DateTimeField(auto_now_add=True)
-
-#     def generate_otp(self):
-#         return str(random.randint(100000, 999999))
 
 class Plans(models.Model):
     price = models.IntegerField()

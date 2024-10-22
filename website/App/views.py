@@ -51,31 +51,6 @@ def candidateRegistration(request):
                 return render(request,'signup.html')
             
             if not re.match(r'^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$', e):  #The re.match() function is used to match the regex pattern against the input email address e.
-                
-                 #Regex Pattern elaboration
-                # ^ matches the start of the string
-                # [a-zA-Z0-9_.+-]+ matches one or more of the following characters:
-                # a-z (lowercase letters)
-                # A-Z (uppercase letters)
-                # 0-9 (digits)
-                # _ (underscore)
-                # . (dot)
-                # + (plus sign)
-                # - (hyphen)
-                # @ matches the @ symbol
-                # [a-zA-Z0-9-]+ matches one or more of the following characters:
-                # a-z (lowercase letters)
-                # A-Z (uppercase letters)
-                # 0-9 (digits)
-                # - (hyphen)
-                # \. matches a period (.) character
-                # [a-zA-Z0-9-.]+ matches one or more of the following characters:
-                # a-z (lowercase letters)
-                # A-Z (uppercase letters)
-                # 0-9 (digits)
-                # - (hyphen)
-                # . (dot)
-                # $ matches the end of the string
 
                 messages.error(request, 'Invalid email address')
                 return render(request, 'signup.html')
@@ -98,69 +73,6 @@ def candidateRegistration(request):
         return render(request,'signup.html')
 
 
-# def loginView(request):
-#     print("entering loginView function")
-#     if request.method == 'POST':
-#         u = request.POST.get('username') 
-#         p = request.POST.get('password')
-#         # The get method is used to retrieve the value for the specified key ('key') from the QueryDict. If the key is not found, it returns the specified default value (default) instead of raising an error.
-#         print(f"username: {u}, password: {p}")
-#         if not u or not p:
-#             messages.error(request, 'Please fill in both username and password.')
-#             return redirect('App:login')
-#         # else:
-#         user = authenticate(username=u, password=p)
-#         user = User.objects.get(username=u)
-#         print(user.is_active)
-
-#         print('this is name of user',user)
-#         try:
-#             print(f"Authenticated User: {user}")  #why it is showing none
-#             if user is not None:
-#                 login(request, user)  # This will set the session automatically
-#                 request.session['name'] = user.username
-#                 print(f"User {user.username} logged in successfully.")
-#                 messages.success(request, 'Logged in successfully!')
-#                 return render(request,'App:home')
-#             else:
-#                 messages.error(request, 'Invalid credentials')
-#                 return redirect('App:login')
-#         except Exception as e:
-#             print(f"Error during authentication: {e}")
-#             messages.error(request, 'An error occurred during authentication')
-#             return redirect('App:login')
-#     else: 
-#           return render(request, 'login.html')
-
-# def loginView(request):
-#     if request.method == 'POST':
-#         u = request.POST.get('username') 
-#         p = request.POST.get('password')
-        
-#         if not u or not p:
-#             messages.error(request, 'Please fill in both username and password.')
-#             return redirect('App:login')
-        
-#         # Check if user exists before authentication
-#         try:
-#             user = User.objects.get(username=u)
-#         except ObjectDoesNotExist:
-#             messages.error(request, 'No user with this username exists')
-#             return redirect('App:login')
-        
-#         # Authenticate user
-#         user = authenticate(username=u, password=p)
-#         if user is not None:
-#             login(request, user)
-#             request.session['name'] = user.username
-#             messages.success(request, 'Logged in successfully!')
-#             return render(request, 'App:home')
-#         else:
-#             messages.error(request, 'Invalid credentials')
-#             return redirect('App:login')
-#     else:
-#         return render(request, 'login.html')
-
 def loginView(request):
     if request.method == 'GET':
         return render(request,'login.html')
@@ -179,19 +91,15 @@ def loginView(request):
 def homelog(request):
     if 'username' not in request.session.keys():
         return redirect('login')
-    return render(request,'home-content.html')
+    else:
+        data = Exam.objects.all()
+        context = {'exams': data}
+        print(context)
+        return render(request,'home-content.html',context)
     
 
 def otp(request):
         return render(request,'login1.html')
-
-# @login_required(login_url='login')  #checks if the user is authenticated and redirects them to the login page if they are not. The login_url='login' argument ensures that it uses the correct login URL.
-# def candidateHome(request):
-#     #if request.user.is_authenticated:
-#     user = request.user
-#     return render(request, 'home-content.html')
-#     # else:
-#     #     return redirect('login')
 
 def candidateHome(request):
     if 'username' not in request.session.keys():
@@ -227,9 +135,11 @@ def calcTestRes(request):
     total_wrong = 0
     test_score = 0
     qid_list = []
+
     for i in request.POST:
         if i.startswith('q_no'):  #data send through hidden input
             qid_list.append(int(request.POST[i]))  #aim is to know the id of the submitted questions
+    
     for n in qid_list:
         question = Questions.objects.get(que_id = n)  #want to fetch those questions which came in the question paper from database
         try:
@@ -267,10 +177,12 @@ def testResHistory(request):
     #to fetch every rows with username which is logged in
     if 'username' not in request.session.keys():
         return redirect('login')
-    candidate = Candidate.objects.filter(username = request.session['username'])
-    results = Result.objects.filter(username_id = candidate[0].username)
+    candidate = Candidate.objects.filter(username = request.session['username']).first()
+    print(candidate.name)
+    results = Result.objects.filter(username = candidate)
     #filter function always returns query set i.e collection of objects but we it will be giving 1 object cause it is 1 for now.
     #get function gives 1 object
+    latest_result = results.last() if results.exists() else None
     context = {'results':results, 'candidate':candidate}
     return render(request,'candidate_history.html',context)
 
@@ -312,34 +224,6 @@ def testSeries(request):
     if 'username' not in request.session.keys():
         return redirect('login/')
     return render(request,'home-content.html')
-
-# def payment_view(request):
-#     context = {
-#         'amount': 1000,  # 1000 paise = 10 INR (as an example)
-#         'order_id': 'order_9A33XWu170gUtm',  # Replace with generated Razorpay order ID
-#     }
-#     return render(request, 'payment.html', context)
-
-# rzp_test_FQnn3Glqg1rhvn
-# from django.views.decorators.csrf import csrf_exempt
-
-# Initialize Razorpay client with your Razorpay credentials
-# razorpay_client = razorpay.Client(auth=(settings.rzp_test_FQnn3Glqg1rhvn, settings.vqmZMvBVFrUgCNxBr59YBr7C))
-
-# @csrf_exempt  # Use this decorator if you're using Razorpay's callback feature
-# def payment_view(request):
-#     if request.method == 'POST':
-#         # Get the selected plan amount from the form (in paise)
-#         plan_amount = int(request.POST.get('plan_amount'))  # Example: 1000 paise = ₹10
-#         plan_name = request.POST.get('plan_name')  # Example: "Monthly Pass Pro"
-
-#         # Create a Razorpay order using the selected amount
-#         razorpay_order = razorpay_client.order.create({
-#             "amount": plan_amount,  # Amount in paise
-#             "currency": "INR",
-#             "payment_capture": 1  # Auto-capture the payment
-#         })
-
 
 def notes(request):
     if 'username' not in request.session.keys():
