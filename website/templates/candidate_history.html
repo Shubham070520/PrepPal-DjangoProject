@@ -38,13 +38,13 @@
                 </li>
             <li><a href="{% url 'App:notes' %}">Notes</a></li>
             <li><a href="{% url 'App:test-history' %}">Test History</a></li>
-            <li><a href="#">Current Affairs</a></li>
+            <li><a href="https://www.gktoday.in/">Current Affairs</a></li>
             <li><a href="{% url 'App:pass' %}">Pass</a></li>
             <li><a href="{% url 'App:logout' %}">Logout</a></li>
         </ul>
     </nav>
     <h1>Your Report Card</h1>
-    <h3>Hello,{{ candidate.name }},you have attempted in total {{ candidate.test_attempted }} test and you have got an aggregate score of {{ candidate.test_score }} and your current test score is {{ result.test_score}}!!</h3>
+    <h3>Hello,{{ candidate.name }},you have attempted in total {{ candidate.test_attempted }} test and you have got an aggregate score of {{ candidate.test_score }}!!</h3>
     <br>
     <br>
     <br>

@@ -192,14 +192,17 @@ def showTestRes(request):
         return redirect('login')
     #fetch latest result from result table
     # result = Result.objects.filter(username = Candidate.objects.get(username = request.session['username'])).latest('res_id')
-    result = Result.objects.filter(res_id = Result.objects.latest('res_id').res_id,username_id = request.session['username'])  #2 things are passed in filter = result_id and username of loggedin user
+    
+    try:
+        result = Result.objects.filter(username_id = request.session['username']).latest('res_id')
+    except Result.DoesNotExist:
+        result = None  # Handle case where there are no results
+        print("No results found for the user.")  # Debugging line
+    # result = Result.objects.filter(res_id = Result.objects.latest('res_id').res_id,username_id = request.session['username'])  #2 things are passed in filter = result_id and username of loggedin user
     context = {'result':result}
     return render(request, 'show_result.html',context)
 
 def logoutView(request):
-    # logout(request)  #user object is in request
-    # messages.success(request,'Logged out successfully!')
-    # return redirect('/')
     if 'username' in request.session.keys():
         del request.session['username']
         del request.session['name']
