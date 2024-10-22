@@ -37,6 +37,7 @@ def candidateRegistration(request):
             return render(request, 'signup.html')
         else:
             # to capture values
+            i = request.POST['name']
             e = request.POST['email']
             n = request.POST['number']
             p = request.POST['password']
@@ -59,10 +60,15 @@ def candidateRegistration(request):
                 messages.error(request, 'Password must be at least 8 characters long')
                 return render(request, 'signup.html')
             
+            # if len(n)<10:
+            if len(n) != 10 or not n.isdigit():
+                messages.error(request, 'Phone number must be of 10 digits. ')
+                return render(request, 'signup.html')
+            
             #Create a New Candidate
             # else:
             try:    #Added a try-except block to catch any unexpected errors during registration.
-                o = Candidate.objects.create(username= u,email=e,password=p,phone = n)
+                o = Candidate.objects.create(username= u,email=e,password=p,phone = n,name = i)
                 o.save()
                 messages.success(request,'Registered successfully,Please Login')
                 return redirect('/login')
@@ -103,7 +109,8 @@ def otp(request):
 
 def candidateHome(request):
     if 'username' not in request.session.keys():
-        return redirect('login')
+        # return redirect('login')
+        return redirect('App:login')
     else:
         data = Exam.objects.all()
         context = {'exams': data}
@@ -170,6 +177,7 @@ def calcTestRes(request):
     candidate.test_attempted += 1  #after giving test +1 attempt
     candidate.test_score = (candidate.test_score*(candidate.test_attempted-1)+test_score)/candidate.test_attempted
     candidate.save()
+    request.session['candidate_name'] = candidate.name
     return redirect('result/')
 
 
@@ -206,7 +214,8 @@ def logoutView(request):
     if 'username' in request.session.keys():
         del request.session['username']
         del request.session['name']
-    return redirect('login/')
+    return redirect('App:home')  # Redirect using the named URL pattern
+
 
 
 def buypass(request):
@@ -221,7 +230,6 @@ def buypass(request):
     context['data'] = payment
     # context = {'data' : payment}
     return render(request,'payment.html',context)
-
 
 def testSeries(request):
     if 'username' not in request.session.keys():

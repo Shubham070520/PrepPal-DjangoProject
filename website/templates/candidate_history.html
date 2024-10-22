@@ -44,7 +44,7 @@
         </ul>
     </nav>
     <h1>Your Report Card</h1>
-    <h3>Hello,{{ candidate.name }},you have attempted in total {{ candidate.test_attempted }} test and you have got an aggregate score of {{ candidate.test_score }}!!</h3>
+    <h3>Hello,{{ request.session.name }} you have attempted in total {{ candidate.test_attempted }} test and you have got an aggregate score of {{ candidate.test_score }}!!</h3>
     <br>
     <br>
     <br>
